@@ -13,6 +13,7 @@ function App() {
     <div className="App">
       <BrokenClick />
       <BrokenClick2 />
+      <Game2 />
     </div>
   );
 }
