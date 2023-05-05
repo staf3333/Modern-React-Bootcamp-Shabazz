@@ -7,13 +7,12 @@ import Rando from './Rando';
 import Button from './Button';
 import BrokenClick from './BrokenClick';
 import BrokenClick2 from './BrokenClick2';
+import Clicker from './Clicker';
 
 function App() {
   return (
     <div className="App">
-      <BrokenClick />
-      <BrokenClick2 />
-      <Game2 />
+      <Clicker />
     </div>
   );
 }
