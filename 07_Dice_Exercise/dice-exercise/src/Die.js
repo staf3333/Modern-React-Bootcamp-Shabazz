@@ -8,6 +8,7 @@ class Die extends Component {
         return (
             <div>
                 This is a dice!
+                <i class="fas fa-dice-one"></i>
             </div>
         )
     }
