@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
+import './Die.css'
 
+//die inherits the number on the dice as a prop from the state of the parent element, dynamically changing class
 class Die extends Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         return (
             <div>
-                This is a dice!
-                <i class="fas fa-dice-one"></i>
-            </div>
+                <i className={this.props.dieFace}></i>
+            </div >
         )
     }
 }
