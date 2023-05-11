@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LottoBall from './LottoBall';
+import './Lottery.css';
 
 class Lottery extends Component {
     static defaultProps = {
@@ -10,21 +11,34 @@ class Lottery extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            nums: [1, 1, 1, 1, 1, 1]
+            nums: Array.from({ length: this.props.numBalls })
         };
-        this.genNums = this.genNums.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
-    genNums() {
+    generate() {
         // this.setState({ nums: newNums })
+        // create a new array filled with 6 different number
+        // this.state.nums.map(num => )
+        this.setState(curState => ({
+            nums: curState.nums.map(n => (
+                Math.floor(Math.random() * this.props.maxNum) + 1
+            ))
+        }))
+    }
+    handleClick() {
+        this.generate();
     }
     render() {
         return (
-            <div>
-                <LottoBall num={4} />
-                <LottoBall num={4} />
-                <LottoBall num={4} />
-                <button onClick={this.genNums}>Generate</button>
-            </div>
+            <section className='Lottery'>
+                <h1>{this.props.title}</h1>
+                <div>
+                    {this.state.nums.map(n => (
+                        <LottoBall num={n} />
+                    ))}
+                </div>
+                <button onClick={this.handleClick}>Generate</button>
+            </section>
         )
     }
 }
