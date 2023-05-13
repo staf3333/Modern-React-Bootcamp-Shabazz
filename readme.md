@@ -1,4 +1,5 @@
-# Learning React With Colt Steele!
+# Learning React With Colt Steele
+
 After taking my first [course with Colt Steele](https://www.udemy.com/course/the-web-developer-bootcamp/) on web development, I'm starting to feel pretty comfortable with HTML/CSS/Javascript as well as using Mongo (admittedly need to brush up on that), Node.js, and Express to build a full stack app (maybe I should ad a link to the YelpCamp project here). So, if I were to build a site using just those... that'd be a MEN stack? Something about that just doesn't seem right :pause_button:. I think what's more common is a MERN stack and I'm missing the R for React!
 
 To complete the loop I'll be taking [another Colt Steele Course](https://www.udemy.com/course/modern-react-bootcamp/) on React! This will be my first time learning a framework and I've heard React is a good place to start. Per the description, this course will use a variety of exercises, projects, and games to teach me how to use the React framework to build and maintain modular JavaScript code with ease!
@@ -109,7 +110,7 @@ class Dog extends React.Component {
 
 Function components are historically used for simpler, "dumb," components that don't require too much logic & aren't changing a lot. They allow you to write logic in a JS function and they don't require you to include a `render()` method, just return content
 
-Example: 
+Example:
 
 ````javascript
 function Dog() {
@@ -125,8 +126,32 @@ For this course, we'll begin working with class components for the most part (so
 
 #### Standard React App Layout
 
-Instead of having our *component* in the index.js file... we'll often have more than one component so we'll want to keep them in separate files! 
+Instead of having our *component* in the index.js file... we'll often have more than one component so we'll want to keep them in separate files!
 
 > Convention: 1 Component per file, w/ component name as file name
 
 It's also conventional for the top-level component to be named **App**. The app component renders the other components and is good to include because readers of the code will know where to start. The app component is usually the only thing rendered in index.js
+
+## Section 9: React State Exercises
+
+In this section, I solidified the concept of using state in react by creating two different mini-apps: Coin Flipper and Color Boxes
+
+### Coin Flipper
+
+Objective:
+
+>For this part, create a coin flipping counter.
+The user should be able to click on a button to flip a coin. Every time the user clicks, the coin gets flipped again. The app should also keep track of how many times heads and tails have shown up.
+Before building anything, think about the structure of your React app. Don’t build this application with a single component: think about how to break your app up into at least two separate components!
+
+I should expect my final output to look something like this:
+![Coin Flipper Demo](/extras/images/coin.gif)
+
+I created two components: Coin, a component whose sole job is to render the correct face of the coin and Flipper, the main component which kept track of the state of the coin flip
+
+What should be kept track of in state? Well, what's changing? The current side the coin is on/should display and hom many times heads and tail show up
+(`numHeads`, `numTails`, `isTails`)
+
+Once I figured out the structuring of everything, making the components themselves was pretty simple
+
+### Color Boxes
