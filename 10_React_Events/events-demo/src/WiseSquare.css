@@ -1,0 +1,9 @@
+.WiseSquare {
+    height: 10em;
+    width: 10em;
+    background-color: purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+}
