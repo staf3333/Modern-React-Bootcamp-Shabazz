@@ -155,3 +155,108 @@ What should be kept track of in state? Well, what's changing? The current side t
 Once I figured out the structuring of everything, making the components themselves was pretty simple
 
 ### Color Boxes
+
+## Section 10: The World Of React Events
+
+### Goals of this section
+
+* Learn how to attach event handlers to components in React
+
+* Learn how to use method binding to preserve the ***this*** context within event handlers
+
+* Learn how to pass event handlers down as props to child components
+
+* Understand the **key** prop that React asks for when mapping data
+
+### Commonly used React Events
+
+#### React Events Review
+
+In React, we can attach event handlers to HTML elements via special reserved attributes. Any event you can listen for in JS, you can listen for in React. Including mouse over events, keyboard events (onKeyUp, on KeyDown etc)
+
+In order to practice/refresh this we created three different components:
+
+1. WiseSquare: practiced **onMouseEnter** event by creating a component that dispensed a wisdom quote whenever you moused over containing div
+
+2. AnnoyingForm: practiced **onKeyUp** by creating a component that sent alerts if you type in the text box. Also, we used the event data itself to give different alerts depending on which key was pressed...
+
+    ```javascript
+    handleKeyUp(e) {
+        if (e.keyCode === 56) {
+            alert('************** I LOVE THE * CHARACTER ************')
+        } else {
+            alert('BOO!')
+        }
+    }
+    ```
+
+3. CopyDemo: practiced **onCopy** event by creating a component that alerts when you tried to copy the text.
+    * interesting thing to note was that the copy event wasn't the act of clicking CTRL + C, it was simply highlighting the text
+
+### The Joys of Method Binding
+
+#### keyword ***this***
+
+You always have to be careful when you reference the keyword ***this*** in event handlers!
+
+Why? Because you lose the ***this*** context when you pass a function as an event handler. To demonstrate this, we moved the quotes from the WiseSquare component we made into defaultProps and didn't change the way the function was defined. When we ran, we got an error because ***this*** was undefined in that context
+
+#### fixing our binding
+
+There are three ways to fix the issue that we were getting (***this*** not being defined in that context):
+
+1. Use **bind** inline:
+
+    ```javascript
+    <div className = "WiseSquare"
+         onMouseEnter={this.dispenseWisdom.bind(this)}>
+         //logic
+    </div>
+    ```
+
+    * Pros
+        * Very explicit
+    * Cons
+        * What if we needed to pass to multiple components? We would have to bind every time!
+        * By doing it this way, we are creating a new function on every render!
+            * this could affect performance!
+2. Use **arrow** function:
+
+    ```javascript
+    <div className = "WiseSquare"
+         onMouseEnter={() => this.dispenseWisdom()}>
+         //logic
+    </div>
+    ```
+
+    * Pros
+        * No mention of bind!
+    * Cons
+        * Intent is less clear (can't really tell that we're binding)
+        * Again, we are creating a new function on every render!
+3. Method bind in the constructor:
+
+    ```javascript
+    class WiseSquare extends Component {
+        constructor(props) {
+            super(props);
+            this.dispenseWisdom = this.dispenseWisdom.bind(this)
+        }
+    }
+    ```
+
+    * Pros
+        * Only have to bind once!
+        * Better for performance
+    * Cons
+        * Uglier to write (you'll be fine)
+
+### Alternative Binding With Class Properties
+
+There is another way to bind keyword ***this***, but it is [experimental](https://tc39.es/process-document/) meaning that it isn't quite fully integrated into JS/React. However, since we are using Babel & CRA, we can use it and let CRA convert it! (Wouldn't work if you didn't use CRA/Babel)
+
+```javascript
+handleClick = () => {    //equals sign and arrow fcn ensures 'this is bound within handleClick
+    console.log('this is', this);
+}
+```
