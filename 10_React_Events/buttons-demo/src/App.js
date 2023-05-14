@@ -1,12 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import WiseSquareWithProps from './WiseSquareWithProps';
-import ExperimentalSquare from './ExperimentalSquare';
+import ButtonList from './ButtonList';
 
 function App() {
   return (
     <div className="App">
-      <ExperimentalSquare />
+      <ButtonList />
     </div>
   );
 }
