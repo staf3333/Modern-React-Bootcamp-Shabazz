@@ -265,6 +265,190 @@ handleClick = () => {    //equals sign and arrow fcn ensures 'this is bound with
 
 In WiseSquare example, `dispenseWisdom()` didn't take any arguments... BUT, what if we needed to pass arguments to an event handler? Let's illustrate this with an example
 
-#### example: ButtonList
+#### Example: ButtonList
 
-For this example we were given an app that had 4 buttons contained in the ButtonList component. We wanted to make it so that the background color of the div containing buttons would change to the background color of whatever button you press!
+For this example we were given an app that had 4 buttons contained in the ButtonList component. We wanted to make it so that the background color of the div containing buttons would change to the background color of whatever button you press.
+
+First we created a method for changing the color in state:
+
+```javascript
+changeColor(newColor) {
+    this.setState({ color: newColor })
+}
+```
+
+However if you just try to call `this.changeColor(c)` in `onClick` event, you'll run into errors b/c it will immediately be invoked (`this.changeColor` vs `this.changeColor()`). In order to fix this (no pun intended), we need to bind the value of ***this***!
+
+First way to do it would be ===> `onClick = {this.changeColor.bind(this, c)}`. But, as we've learned, this is not the best way to do it!
+
+### Passing Methods to Child Components
+
+Passing methods to child components is a very common pattern in React! The idea behind it is that children are often **not stateful**, but need to tell parents to change state! (this is the problem I was running into with the color boxes exercise, I couldn't figure out how to get a single box component to change the state of the larger container)
+
+#### How data flows
+
+1. A parent component defines a function
+2. The function is passed as a property to a child component
+3. The child component invokes the property
+4. The parent function is called, usually setting new state
+5. Parent component is re-rendered, along with it's children
+
+#### Example: making a better NumberList
+
+In order to understand the data flow, we created a NumberList component that has state with an array of numbers & displays a button that allows you to remove the corresponding item onClick.
+
+In order for button component to work, we needed to pass a `remove` function from NumberList component down to Item component so onClick of a button, the remove function will be called on that item
+
+```javascript
+class NumberList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { nums: [1, 2, 3, 4, 5] };
+  }
+
+  remove(num) {
+    this.setState(st => ({
+      nums: st.nums.filter(n => n !== num)
+    }));
+  }
+
+  render() {
+    let nums = this.state.nums.map(n => (
+      <NumberItem value={n} />
+    ));
+    return (
+      <div>
+        <h1>First Number List</h1>
+        <ul>{nums}</ul>
+      </div>
+    );
+  }
+}
+```
+
+There are two ways to pass remove function down
+
+1. pass `remove` function in as a prop:
+
+    ```javascript
+    let nums = this.state.map(n => <NumberItem value={n} remove={() => this.remove(n)} />)
+    ```
+
+    * note that we're using the arrow function notation = making a bunch of new functions by setting inline in render
+2. Do it without binding inside of render --> bind once in the constructor:
+
+    In constructor we'll have:
+
+    ```javascript
+    constructor(props) {
+        super(props);
+        this.state = { nums: [1, 2, 3, 4, 5] };
+        this.remove = this.remove.bind(this)
+    }
+    ```
+
+    Then in render we'll have:
+
+    ```javascript
+    let nums = this.state.nums.map(n => <NumberItem value={n} remove={this.remove}>)
+    ```
+
+Problem with option 2 as is is that we're not passing in the argument so that when we go to call method on child component... `<button onClick={this.props.remove}>X</button`, we'll get weird behavior because the default behavior is to pass in the event object itself!
+
+To fix this issue, instead of passing in this.props.remove directly, we add an extra layer in between:
+
+First, add a method in NumberItem component, `handleRemove`
+
+```javascript
+handleRemove(evt) {
+    this.props.remove(this.props.value)
+  }
+```
+
+Then, change the render of the button to use `handleRemove` instead of `remove`
+
+```javascript
+<button onClick={this.handleRemove}>X</button>
+```
+
+Lastly, bind `handleRemove` in constructor:
+
+```javascript
+constructor(props) {
+    super(props);
+    this.handleRemove = this.handleRemove.bind(this)
+  }
+```
+
+Final result:
+
+```javascript
+
+class BetterNumberItem extends Component {
+  constructor(props) {
+    super(props);
+    this.handleRemove = this.handleRemove.bind(this)
+  }
+  handleRemove(evt) {
+    this.props.remove(this.props.value)
+  }
+  render() {
+    return (
+      <li>
+        {this.props.value}
+        <button onClick={this.handleRemove}>X</button>
+      </li>
+    );
+  }
+}
+```
+
+#### Where to bind?
+
+Here are Colt's guidelines on where to bind methods:
+
+* The higher, the better - don't bind in child component if not needed
+* If you need a parameter, pass it down to the child as a property, then bind in parent and child component
+* Avoid inline arrow functions/binding if possible
+* No need to bind constructor and make an inline function (redundant)
+* If stuck, don't worry about performance, just try to get components talking to each other --> refactor later
+
+### Parent-Child Method Naming
+
+You can call event handlers whatever you want... React could care less. However, for consistency and readability, Colt recommends following the **action/handleAction** pattern (i.e. remove/handleRemove)
+
+### Quick Detour: React Keys
+
+Up until now, anytime we've been mapping over data and returning a list of components, we get a message warning about keys for list items: ![Key Error](/extras/images/keyError.png)
+***key*** is a special string attribute to include when creating lists of events. Keys help React identify which items have been changed, are added, or are removed
+
+#### Adding keys
+
+To assign a key, add it as a property to whatever component you're mapping out:
+
+```javascript
+///whatever comes before this
+nums.map(n => (
+    <NumberItem 
+        value={n}
+        key={n} //in this example we set key to be num itself
+        remove={this.remove}    
+    />
+))
+```
+
+Note: the way we set key to be num itself only work is **if the data (numbers in this case) is unique**
+
+> In our example, if we have duplicate numbers, then removing one value will remove all it's duplicates
+
+We want to ALWAYS have unique keys!
+
+#### Picking keys
+
+* The best way to pick keys is to use a string that uniquely identifies item among siblings!
+* Most often you would use IDs from your data as keys
+* As a **last resort**, you may use the iteration index as a key (if you don't have stable IDs)
+  * Not a very good idea!
+  * Don't use indexes for keys if item order may change or items can be deleted!
+    * Can cause performance issues or bugs with component state
+* There does exist libraries that help you make unique keys
