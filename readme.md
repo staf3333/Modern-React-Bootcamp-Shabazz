@@ -260,3 +260,11 @@ handleClick = () => {    //equals sign and arrow fcn ensures 'this is bound with
     console.log('this is', this);
 }
 ```
+
+### Binding With Arguments
+
+In WiseSquare example, `dispenseWisdom()` didn't take any arguments... BUT, what if we needed to pass arguments to an event handler? Let's illustrate this with an example
+
+#### example: ButtonList
+
+For this example we were given an app that had 4 buttons contained in the ButtonList component. We wanted to make it so that the background color of the div containing buttons would change to the background color of whatever button you press!
