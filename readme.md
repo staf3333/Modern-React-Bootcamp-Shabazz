@@ -420,6 +420,7 @@ You can call event handlers whatever you want... React could care less. However,
 ### Quick Detour: React Keys
 
 Up until now, anytime we've been mapping over data and returning a list of components, we get a message warning about keys for list items: ![Key Error](/extras/images/keyError.png)
+
 ***key*** is a special string attribute to include when creating lists of events. Keys help React identify which items have been changed, are added, or are removed
 
 #### Adding keys
