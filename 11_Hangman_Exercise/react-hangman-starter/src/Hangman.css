@@ -31,6 +31,20 @@
   margin-top: 0;
 }
 
+#reset {
+  text-align: center;
+  display: block;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  background: purple;
+  box-shadow: 0 6px rgb(71, 9, 112);
+}
+
+#reset:hover {
+  background: 0 6px rgb(71, 9, 112);
+}
+
 .Hangman button {
   border: none;
   font-family: inherit;
