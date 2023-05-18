@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Cell from "./Cell";
 import './Board.css';
 
@@ -31,24 +31,43 @@ import './Board.css';
 
 class Board extends Component {
 
+  static defaultProps = {
+    nrows: 5,
+    ncols: 5,
+    chanceLightStartsOn: 0.25
+  }
+
   constructor(props) {
     super(props);
+    let { nrows, ncols } = this.props
 
     // TODO: set initial state
+    this.state = {
+      hasWon: false,
+      board: this.createBoard()
+    }
   }
 
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
 
   createBoard() {
     let board = [];
+    let { nrows, ncols, chanceLightStartsOn } = this.props;
     // TODO: create array-of-arrays of true/false values
+    for (let y = 0; y < nrows; y++) {
+      let row = [];
+      for (let x = 0; x < ncols; x++) {
+        row.push(Math.random() < chanceLightStartsOn);
+      }
+      board.push(row);
+    }
     return board
   }
 
   /** handle changing a cell: update board & determine if winner */
 
   flipCellsAround(coord) {
-    let {ncols, nrows} = this.props;
+    let { ncols, nrows } = this.props;
     let board = this.state.board;
     let [y, x] = coord.split("-").map(Number);
 
@@ -66,14 +85,27 @@ class Board extends Component {
     // win when every cell is turned off
     // TODO: determine is the game has been won
 
-    this.setState({board, hasWon});
+    this.setState({ board }); // add hasWon
   }
 
 
   /** Render game board or winning message. */
 
   render() {
-
+    console.log(this.state)
+    return (
+      <table className="Board">
+        <tbody>
+          {this.state.board.map((row, y) => (
+            <tr key={y}>
+              {row.map((cell, x) => (
+                <td>< Cell isLit={cell} key={`${y}-${x}`} /></td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    )
     // if the game is won, just show a winning msg & render nothing else
 
     // TODO
