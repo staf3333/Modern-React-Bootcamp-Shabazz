@@ -46,6 +46,8 @@ class Board extends Component {
       hasWon: false,
       board: this.createBoard()
     }
+
+    this.flipCellsAround = this.flipCellsAround.bind(this);
   }
 
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
@@ -69,7 +71,7 @@ class Board extends Component {
   flipCellsAround(coord) {
     let { ncols, nrows } = this.props;
     let board = this.state.board;
-    let [y, x] = coord.split("-").map(Number);
+    let [y, x] = coord.split("-").map(Number); //think this line means that we'll pass the key into it and the y coord (first number) and x coord (second number) from "0-1"
 
 
     function flipCell(y, x) {
@@ -81,25 +83,34 @@ class Board extends Component {
     }
 
     // TODO: flip this cell and the cells around it
+    flipCell(y, x);
+    flipCell(y + 1, x); //flip above cell
+    flipCell(y - 1, x); //flip below cell
+    flipCell(y, x - 1); //flip left cell
+    flipCell(y, x + 1); //flip right cell
+
 
     // win when every cell is turned off
     // TODO: determine is the game has been won
+    let hasWon = board.every(row => row.every(cell => !cell));
 
-    this.setState({ board }); // add hasWon
+    this.setState({ board: board, hasWon: hasWon }); // add hasWon
   }
 
 
   /** Render game board or winning message. */
 
   render() {
-    console.log(this.state)
+    if (this.state.hasWon) {
+      return <h1>You Won!</h1>
+    }
     return (
       <table className="Board">
         <tbody>
           {this.state.board.map((row, y) => (
             <tr key={y}>
               {row.map((cell, x) => (
-                <td>< Cell isLit={cell} key={`${y}-${x}`} /></td>
+                < Cell isLit={cell} key={`${y}-${x}`} flipCellsAroundMe={this.flipCellsAround} coord={`${y}-${x}`} />
               ))}
             </tr>
           ))}
