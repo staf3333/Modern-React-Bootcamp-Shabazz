@@ -453,3 +453,116 @@ We want to ALWAYS have unique keys!
   * Don't use indexes for keys if item order may change or items can be deleted!
     * Can cause performance issues or bugs with component state
 * There does exist libraries that help you make unique keys
+
+## Section 11: Hangman Exercise
+
+### Intro to Hangman
+
+These next two sections were dedicated to solidifying our knowledge of everything we learned so far (Props, State, Handling Events, Passing state of parent --as well as functions which change state of parent component-- as props to children components) by creating two different games: Hangman and Lights Out
+
+For the Hangman exercise, we were given a fair amount of starter code and we had to do these things:
+
+1. Add a key to the buttons
+2. Keep track of the number of wrong guesses
+3. End game on a loss
+    * In starter code, game allowed you to keep pressing buttons even after the game is over
+    * Want to change it so it no longer shows buttons & and shows message "you win" and reveal the correct word
+4. Add alt text to hangman image for accessibility
+5. Use a random word to be the answer
+6. Add a restart Button
+
+### Adding a key
+
+This part was pretty simple, since there are no duplicates in the alphabet (which we mapped over an array of to create the butttons) we could just set the key to be the letter itself
+
+```javascript
+<button
+        value={ltr}
+        key={ltr}
+        onClick={this.handleGuess}
+        disabled={this.state.guessed.has(ltr)}
+      >
+```
+
+### Tracking incorrect guesses
+
+Simple, just added a p tag in the render that displayed the `nWrong` from the state  
+
+```javascript
+<p className='Hangman-btns'>{this.generateButtons()}</p>
+```
+
+### Ending game on a loss
+
+Used conditionals outside of return (for Hangman render method) because there were multiple conditions I had to worry about (if you ran out of guesses and lost, or if you won) and I didn't want to have to deal with ternary operator
+
+```javascript
+let content;
+  if (this.state.nWrong === this.props.maxWrong) {
+    content = <div>
+      <p>You Lose! You are absolutely atrocious at this game!</p>
+      <p>Here is the correct answer, bum: {this.state.answer}</p>
+    </div>
+  } else {
+    content = <div>
+      <p className='Hangman-btns'>{this.generateButtons()}</p>
+    </div>
+  }
+```
+
+> here, we create a content variable, that we can easily pass into the return and it will adapt based on the conditionals
+
+### Adding alt text
+
+Simple again, just add alt attribute and set it to be equal to `nWrong/maxWrong`
+
+```javascript
+ const altText = `${this.state.nWrong}/${this.props.maxWrong}`
+ /// then in render
+ <img src={this.props.images[this.state.nWrong]} alt={altText} />
+```
+
+> TIP: So in this, I created a
+
+### Set answer to be a random word
+
+All I had to do was import random word function from the words.js file, then set `answer: {randomWord()}` when initializing state
+
+### Adding restart button
+
+Created new function to reset the state on button click
+
+```javascript
+resetGame() {
+  this.setState({ nWrong: 0, guessed: new Set(), answer: randomWord() })
+}
+```
+
+### Conclusion
+
+Overall, this exercise was pretty fun! Definitely came with a lot of the logic already built in but it was good to practice using state, props, and events
+
+## Section 12: Lights Out Game
+
+This is the second exercise to practice what I learned with state, props, and event handlers! For this exercise, we were also given some starter code, but I had to build out a lot of the logic on my own... it was a bit more advanced but I got through it!
+
+### Introducing Lights Out
+
+Objective: Make a game on a grid of lights were toggling one light toggles it's neighbors. The goal of the game is to turn all the lights off.
+
+Instead of telling us how to structure the components right off the back, Colt asked us to take a second to think ab how we would structure the components...
+
+* App components- responsible for rendering the GameBoard component; could pass in props to like how large you want the game board to be, but it definitely should not have a state
+* GameBoard - renders board grid
+  * props?
+    * A  2D array? This is what I said at first but instead of create 2 seperate 2D arrays for both props and state, I can just use one 2D to keep track of is a light on or not and render Lights based of that
+  * state?
+    * What's changing - the state of each light, whether the game is won or not
+* Light - renders a single light div, where state of that light (from GameBoard components) is passed in as a prop to this child component.
+* Also need a way to toggle lights on and off --> function passed down to Light from GameBoard
+
+^^^ The above is what I came up with on my own and I was pretty spot on! I ended up using different component names to match the starter code: App (same), GameBoard => Board, Light => Cell
+
+### Displaying the game board
+
+First task was to display the game board in the first place.
