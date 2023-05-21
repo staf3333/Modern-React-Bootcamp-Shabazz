@@ -565,4 +565,98 @@ Instead of telling us how to structure the components right off the back, Colt a
 
 ### Displaying the game board
 
-First task was to display the game board in the first place.
+First task was to figure out how to actually display the game board. Like I figured when planning the component structure, I knew I was going to use a 2D array to keep track of the state of the lights on board (isLit or not).
+
+Before doing this, I needed to actually initialize the state (& props) of the Board component.
+
+My first inclination was to create an empty 2D array, and then fill it with the true/false values by looping over. I found this stack overflow explanation of how to create an empty 2D array
+
+Lets say for a 5x5 board:
+
+```javascript
+board: new Array(5).fill().map(_ => new Array(5).fill(false))
+```
+
+> Which is apparently different than `Array(5).fill(new Array(5).fill(false))`. This one apparently adds a reference to the array that was passed into the fill method... meaning... all the rows are filled w/ references to ONE array. if you update `arr[0][0]` the value of `arr[1][0]` will be changed to! Arrow function is important!
+
+This would initiate a 5x5 array where every value is initialized with false. However, with this there is a clear issue: **it won't allow me to use chances that the light will start on prop, `chanceLightStartsOn`, if I build it this way.**
+
+Then it made sense why there was a `createBoard` helper method-- I needed to build it from scratch using for loops!
+
+```javascript
+ static defaultProps = {
+    nrows: 5,
+    ncols: 5,
+    chanceLightStartsOn: 0.25
+  }
+
+  constructor(props) {
+    super(props);
+    let { nrows, ncols } = this.props
+
+    // set initial state
+    this.state = {
+      hasWon: false,
+      board: this.createBoard()
+    }
+```
+
+Creating the `createBoard` method was simple after I thought of the logic. You start by initializing an empty array, and then loop through a nested for loop to push each row onto the board:
+
+```javascript
+ createBoard() {
+    let board = [];
+    let { nrows, ncols, chanceLightStartsOn } = this.props;
+    // create array-of-arrays of true/false values
+    for (let y = 0; y < nrows; y++) {
+      let row = [];
+      for (let x = 0; x < ncols; x++) {
+        row.push(Math.random() < chanceLightStartsOn);
+      }
+      board.push(row);
+    }
+    return board
+  }
+```
+
+Then I used .map to render the board:
+
+```javascript
+return (
+      <table className="Board">
+        <tbody>
+          {this.state.board.map((row, y) => (
+            <tr key={y}>
+              {row.map((cell, x) => (
+                < Cell isLit={cell} key={`${y}-${x}`} flipCellsAroundMe={this.flipCellsAround} coord={`${y}-${x}`} />
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    )
+```
+
+> in order to get iteration index of .map fcn, add second input to the arrow function: `.map((item, index) => xyz)`
+
+### Flipping Cells
+
+Was pretty simple, for a given cell, if it's clicked, flip the value in the board array (which you can easily do if you have the x,y coord of where the clicked cell is---> **can get from the key**)
+
+Had to make sure to pass the flipCells fcn to the individual cell components (as well as the coordinates) to actually call the function with the event listeners
+
+### Winning the Game
+
+In order to check if the user has won the game, we have to check the board after every click to see if all the lights are off.
+
+One way to do this is by using nested for loops, another way is by using the .every method on the board:
+
+```javascript
+let hasWon = board.every(row => row.every(cell => !cell));
+```
+
+> The every() method executes a function for each array element. The every() method returns true if the function returns true for all elements. The every() method returns false if the function returns false for one element. The every() method does not execute the function for empty elements.
+
+I skipped the styling for this exercise honestly
+
+## Section 13: Forms in React
