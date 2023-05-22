@@ -660,3 +660,34 @@ let hasWon = board.every(row => row.every(cell => !cell));
 I skipped the styling for this exercise honestly
 
 ## Section 13: Forms in React
+
+#### Goals
+
+The goals of this section are to learn how to build forms with React, as well as understand what controlled components are and how to use them
+
+### Intro to React Forms
+
+#### Forms
+
+HTML form elements work different than other DOM elements in React. HTML forms naturally keep some internal state; data that the form has access to that the rest of the app doesn't until you click submit!
+
+If we were to use vanilla HTML forms, there would be a knowledge gap where we wouldn't know what's in the form until we submitted it. In order to get rid of that... **involve state!**
+
+#### Thinking about state
+
+It is convenient to have a JS function that: 
+1. Handles the submission of the form 
+2. Has access to the data that the user entered
+
+The technique to achieve this is called using **controlled components**
+
+#### Controlled Components
+
+HTML form elements maintain their own state and update it based on user input. However, in React, mutable state is kept in the *state* of the components (and are only updated with `setState()`).
+
+So, how do we reconcile these two i.e. how do we use React to control form input state?
+
+
+
+
+
