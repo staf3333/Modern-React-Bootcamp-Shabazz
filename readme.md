@@ -661,7 +661,7 @@ I skipped the styling for this exercise honestly
 
 ## Section 13: Forms in React
 
-#### Goals
+### Goals
 
 The goals of this section are to learn how to build forms with React, as well as understand what controlled components are and how to use them
 
@@ -677,7 +677,7 @@ If we were to use vanilla HTML forms, there would be a knowledge gap where we wo
 
 It is convenient to have a JS function that:
 
-1. Handles the submission of the form 
+1. Handles the submission of the form
 2. Has access to the data that the user entered
 
 The technique to achieve this is called using ***controlled components***
@@ -701,4 +701,180 @@ Input elements controlled in this way are called ***controlled components***
 
 Since value attribute is set on element, the displayed value will always be `this.state.fullName` -- making React the single source of truth
 
-Since `handleChange` runs on every keystroke to update the React state, the displayed value will update as the user types. With a ***controlled component***, every state mutatuion 
+```javascript
+class NameForm extend Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      fullName: ''
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleSubmit(evt) {
+    //do something with form data
+  }
+  handleChange(evt) {
+    evt.preventDefault();
+    this.setState(state => (
+      //set state on each keystroke event
+    ));
+  }
+  render() {
+    return (
+      <form onSubmit='this.handleSubmit'>
+        <label for='fullname'>Full Name:</label>
+        <input id='fullname' value={this.state.fullName} onChange={this.handleChange}>
+        <button>Add!</button>
+      </form>
+    )
+  }
+}
+```
+
+Since `handleChange` runs on every keystroke to update the React state, the displayed value will update as the user types. With a ***controlled component***, every state mutation will have an associated handler function. This makes it easier to modify or validate user input
+
+### Writing Forms w/ Multiple Inputs
+
+What would we do in the case where we have a form that has more than one input?
+
+```javascript
+class NameForm extend Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstName: '',
+      lastName: ''
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleSubmit(evt) {
+    //do something with form data
+  }
+  handleChange(evt) {
+    evt.preventDefault();
+    this.setState(state => (
+      //set state on each keystroke event
+    ));
+  }
+  render() {
+    return (
+      <form onSubmit='this.handleSubmit'>
+        <label for='lastname'>Last Name:</label>
+        <input id='lastname' value={this.state.lastName} onChange={this.handleChange}>
+        <label for='firstname'>Last Name:</label>
+        <input id='firstname' value={this.state.firstName} onChange={this.handleChange}>
+        <button>Add!</button>
+      </form>
+    )
+  }
+}
+```
+
+In this case, each input needs an onChange property but we can't just reuse the same `handleChange` function. Would we need an event handler for every input??
+
+#### ES2015 review
+
+ES2015 introduced a few object enhancements... including the ability to create objects w/ dynamic keys based on JS expressions --> these are called ***computed property names***
+
+In ES5...
+
+```javascript
+var catData = {};
+var microchip = 12345654;
+catData[microchip]= "Blue Steele";
+```
+
+In ES2015...
+
+```javascript
+let microchips = 12345654;
+let catData = {
+  [microchip]: "Blue Steele"
+}
+```
+
+^ computes name of property based on the value of microchip
+
+#### Application to form components
+
+Why is ES2015 improvement relevant? Well, instead of making seperate `onChange` event handlers for each individual input, **we can make one generic function for multiple inputs!**
+
+To handle multiple controlled inputs, add HTML `name` attribute to each JSX input element & let handler fcn decide the appropriate key in state to update based on `event.target.name`
+
+```javascript
+class MultipleForm extends Components {
+  // all that other jazz
+  handleChange(evt) {
+    this.setState({
+      [evt.target.name]: evt.target.value
+    });
+  }
+  // render
+}
+```
+
+> NOTE: Using this method, keys in state have to math the input name attributes exactly
+
+### htmlFor Attribute
+
+Note from earlier: when **making a label** in JSX we typically set a `for` attribute for the corresponding input item. However, `for` is a reserved word in JS so we need to use `htmlFor`.
+
+Needs to match the value of id on input!
+
+### Passing Data Up to a Parent Component
+
+In React, generally you have downward data flow --> "SMart" parent components with simple child components. However, forms require a lot of state and tend to be in child component... how do we reconcile this?
+
+To practice this, we made a simple dummy shopping list app:
+
+1. First, we created a basic for w/ two inputs (name & qty)
+2. Applied logic we just went over:
+    * apply name attribute and match it to state name
+    * use `htmlFor` to match label to input id
+    * create `handleChange` event handler, and use ES2015 literals to set state based on what input is being changed
+3. Lastly, actually do something with the data1
+    * defined a method in parent component (ShoppingList) that will add item to list in state, and pass it down to form component
+    * call method w/ state from the form
+
+### Using the UUID Library
+
+Seen how it's bad to use iteration index as a key property for our components, but what if we have no natural unique keys? We can **use library to create uuid**. ***Universally Unique Identifier (UUID)*** is a way to uniquely identify info
+
+You can install it using `npm i uuid`
+
+```javascript
+import { v4 as uuidv4 } from 'uuid';
+
+class BoxList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            boxes: [
+                { height: 300, width: 300, backgroundColor: "pink", id: uuidv4() },
+                { height: 500, width: 400, backgroundColor: "orange", id: uuidv4() }
+            ]
+        }
+        this.createBox = this.createBox.bind(this);
+        this.removeBox = this.removeBox.bind(this);
+    }
+    //etc
+}
+```
+
+## Section 14: Forms Exercise
+
+Objective of this exercise was to create a new React application, which contains the following components:
+
+* App - this component should render the BoxList component.
+* BoxList - Place your state that contains all of the boxes here. This component should render all of the Box components along with the NewBoxForm component
+* Box- this component should display a div with a background color, width and height based on the props passed to it.
+* NewBoxForm - this component should render a form that when submitted, creates a new Box. You should be able to specify the Box’s width, height, and background color. When the form is submitted, clear the input values.
+* When each Box component is displayed, add a button with the text of of “X” next to each Box. When this button is clicked, remove that specific box. This will require you to pass a function down as props - the button should not be a separate component, it should be included in the Box component.
+
+I made it without watching the walkthroughs so I was pretty proud of myself!
+
+REMINDER TO ADD A GIF OF MY APP WORKING HERE
+
+## Section 15: Todo List Project
