@@ -675,19 +675,30 @@ If we were to use vanilla HTML forms, there would be a knowledge gap where we wo
 
 #### Thinking about state
 
-It is convenient to have a JS function that: 
+It is convenient to have a JS function that:
+
 1. Handles the submission of the form 
 2. Has access to the data that the user entered
 
-The technique to achieve this is called using **controlled components**
+The technique to achieve this is called using ***controlled components***
 
-#### Controlled Components
+#### Controlled components
 
 HTML form elements maintain their own state and update it based on user input. However, in React, mutable state is kept in the *state* of the components (and are only updated with `setState()`).
 
-So, how do we reconcile these two i.e. how do we use React to control form input state?
+So, how do we reconcile these two i.e. how do we use React to control form input state? We want the data from our forms to always be in sync with our state data!
 
+#### One source of truth
 
+In order to have them in sync, we make React state to be the "single source of truth." We want react to control:
 
+1. What is shown (value of the component)
+2. What happens when the user types (kept in state)
 
+Input elements controlled in this way are called ***controlled components***
 
+#### How controlled form works
+
+Since value attribute is set on element, the displayed value will always be `this.state.fullName` -- making React the single source of truth
+
+Since `handleChange` runs on every keystroke to update the React state, the displayed value will update as the user types. With a ***controlled component***, every state mutatuion 
