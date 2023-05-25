@@ -19,11 +19,13 @@ class NewTodoForm extends Component {
         evt.preventDefault();
         const newTodo = { todoItem: this.state.newTodoText, id: uuidv4() }
         this.props.addTodo(newTodo);
+        this.setState({
+            newTodoText: ''
+        })
     }
     render() {
         return (
             <div>
-                <h1>Todo Form!</h1>
                 <form onSubmit={this.handleSubmit}>
                     <label htmlFor='todoInput'>New Todo</label>
                     <input

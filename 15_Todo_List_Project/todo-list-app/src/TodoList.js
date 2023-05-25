@@ -11,6 +11,7 @@ class TodoList extends Component {
         }
         this.addTodo = this.addTodo.bind(this);
         this.removeTodo = this.removeTodo.bind(this);
+        this.update = this.update.bind(this);
     }
     addTodo(todo) {
         this.setState(state => ({
@@ -20,17 +21,34 @@ class TodoList extends Component {
     removeTodo(id) {
         this.setState(state => ({
             todos: state.todos.filter(todo => todo.id !== id)
-        }))
+        }));
+    }
+    update(id, updatedTask) {
+        const updatedTodos = this.state.todos.map(todo => {
+            if (todo.id === id) {
+                return { ...todo, todoItem: updatedTask };
+            }
+            return todo;
+        })
+        this.setState({ todos: updatedTodos });
     }
     render() {
         return (
             <div>
+                <h1>TodoList!</h1>
+                <NewTodoForm addTodo={this.addTodo} />
                 <ul>
                     {this.state.todos.map(todo => (
-                        <Todo task={todo.todoItem} key={todo.id} id={todo.id} removeTodo={this.removeTodo} />
+                        <Todo
+                            task={todo.todoItem}
+                            key={todo.id}
+                            id={todo.id}
+                            removeTodo={this.removeTodo}
+                            updateTodo={this.update}
+                        />
                     ))}
                 </ul>
-                <NewTodoForm addTodo={this.addTodo} />
+
             </div>
         );
     }
