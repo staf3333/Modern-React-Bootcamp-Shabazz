@@ -33,7 +33,7 @@ class Rule {
 }
 
 /** Given a sought-for val, return sum of dice of that val.
- *
+ * 
  * Used for rules like "sum of all ones"
  */
 
