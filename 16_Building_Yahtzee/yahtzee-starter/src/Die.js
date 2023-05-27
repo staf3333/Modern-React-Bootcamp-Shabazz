@@ -10,14 +10,27 @@ class Die extends Component {
     this.props.handleClick(this.props.idx);
   }
   render() {
-    return (
-      <button
+    let buttonType;
+    if (this.props.rollsLeft > 0) {
+      buttonType = <button
         className={"Die"}
         style={{ backgroundColor: this.props.locked ? "grey" : "black" }}
         onClick={this.handleClick}
       >
         {this.props.val}
       </button>
+    } else {
+      buttonType = <button
+        className={"Die"}
+        style={{ backgroundColor: this.props.locked ? "grey" : "black" }}
+      >
+        {this.props.val}
+      </button>
+    }
+    return (
+      <div>
+        {buttonType}
+      </div>
     );
   }
 }
