@@ -878,3 +878,27 @@ I made it without watching the walkthroughs so I was pretty proud of myself!
 REMINDER TO ADD A GIF OF MY APP WORKING HERE
 
 ## Section 15: Todo List Project
+
+### Project Overview
+
+The goal of this project was to crate a Todo list app that allows you to create, edit, delete, and mark off items as complete.
+
+Going into this project, I expected it to be quite similar to the other exercises we worked on (as far as creating and deleting by changing state). The main thing that was new was the idea of editing (and selectively rendering form depending on state)
+
+### TodoList and TodoItem Components
+
+Adding these components was pretty easy; similar to the forms exercise from the last section.
+
+In the TodoList component, we store the list of todo items/tasks in state (first I just stored as an array of strings for tasks, but then when I added an id to each todo item it became an array of todo objects with each object containing a task and an id). We pass that state down as props to each individual TodoItem (just used Todo in this example) as well as the methods for deleting, and editing todo task.
+
+### Adding NewTodoForm
+
+This was also simple and similar to forms exercise. We pass method for creating a new Todo (which means adding a new Todo object to state) down to NewTodoForm as props.
+
+### Editing Todos
+
+In order to edit Todos, we had to use some new techniques...
+
+In the Todo component, we needed to have some conditional logic that tells us whether to display a form or todo task. We also needed to keep track of which one is showing... so we use state!
+
+Clicking the edit button on Todo component toggled the `isEditing` state of component to true or false
