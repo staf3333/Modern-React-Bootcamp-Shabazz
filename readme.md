@@ -902,3 +902,5 @@ In order to edit Todos, we had to use some new techniques...
 In the Todo component, we needed to have some conditional logic that tells us whether to display a form or todo task. We also needed to keep track of which one is showing... so we use state!
 
 Clicking the edit button on Todo component toggled the `isEditing` state of component to true or false
+
+<https://legacy.reactjs.org/docs/strict-mode.html#detecting-unexpected-side-effects> (this link is for the explanation of why componentDidMount runs twice)
