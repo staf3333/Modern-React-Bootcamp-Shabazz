@@ -1,0 +1,26 @@
+.App {
+  background-color: #F9F5F6;
+  height: 100vh;
+}
+
+.App-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #545B77;
+  height: 64px;
+  color: white;
+}
+
+.App-nav a {
+  font-size: 2rem;
+  text-decoration: none;
+  color: white;
+  transition: all 0.4s ease-out;
+}
+
+.App-nav a:hover {
+  border-bottom: 2px solid rgb(196, 223, 236);
+  color: rgb(4, 46, 94);
+  cursor: pointer;
+}
