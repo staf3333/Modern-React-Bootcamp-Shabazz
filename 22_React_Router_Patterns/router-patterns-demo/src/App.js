@@ -1,13 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 import Food from './Food';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-      <Food name="Kale" />
-      <Food name="Chicken" />
-      <Food name="Banana" />
+      <Routes>
+        <Route path="/food/:name" element={<Food />} />
+      </Routes>
     </div>
   );
 }
