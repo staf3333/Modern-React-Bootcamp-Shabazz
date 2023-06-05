@@ -5,10 +5,12 @@ import { Routes, Route } from 'react-router-dom';
 import Meal from './Meal';
 import NotFound from './NotFound';
 import FoodSearch from './FoodSearch';
+import Navbar from './Navbar';
 
 function App() {
   return (
     <div className="App">
+      <Navbar />
       <Routes>
         <Route path='/' element={<FoodSearch />} />
         <Route path="/food/:foodName" element={<Food />} />

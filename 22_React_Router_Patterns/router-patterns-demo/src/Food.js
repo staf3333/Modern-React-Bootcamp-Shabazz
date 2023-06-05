@@ -25,7 +25,7 @@ const Food = (props) => {
     // }, []);
     return (
         <div className='Food'>
-            {/\d/.test(foodName) ? (<Navigate to="/" />) : (
+            {/\d/.test(foodName) ? (<Navigate to="/notfound" />) : (
                 <div>
                     <h1>I love to eat {foodName}</h1>
                     <img src={url} alt={foodName} />
