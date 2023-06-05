@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import './Food.css';
-import { useParams, useEffect } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 
 // class Food extends Component {
 //     render() {
@@ -18,14 +18,20 @@ import { useParams, useEffect } from 'react-router-dom';
 // export default withRouter(Food);
 
 const Food = (props) => {
-    let { name } = useParams();
-    useEffect(() => {
-        console.log(name);
-    }, []);
+    let { foodName } = useParams();
+    const url = `https://source.unsplash.com/1600x900/?${foodName}`;
+    // useEffect(() => {
+    //     console.log(foodName);
+    // }, []);
     return (
         <div className='Food'>
-            <h1>I love to eat {this.props.name}</h1>
-            <img src={url} alt={this.props.name} />
+            {/\d/.test(foodName) ? (<Navigate to="/" />) : (
+                <div>
+                    <h1>I love to eat {foodName}</h1>
+                    <img src={url} alt={foodName} />
+                </div>
+            )}
+
         </div>
     )
 }
