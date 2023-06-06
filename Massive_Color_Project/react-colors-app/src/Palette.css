@@ -5,3 +5,14 @@
 .Palette-colors {
     height: 90%;
 }
+
+.Slider {
+    width: 340px;
+    margin: 0 10px;
+    display: inline-block;
+}
+
+
+/* .rc-slider-track
+.rc-slider-handle
+.rc-slider-rail */
