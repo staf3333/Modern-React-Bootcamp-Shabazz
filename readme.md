@@ -904,3 +904,143 @@ In the Todo component, we needed to have some conditional logic that tells us wh
 Clicking the edit button on Todo component toggled the `isEditing` state of component to true or false
 
 <https://legacy.reactjs.org/docs/strict-mode.html#detecting-unexpected-side-effects> (this link is for the explanation of why componentDidMount runs twice)
+
+## Section 24: The Massive Color Project Pt. 1
+
+### Introducing the Color App
+
+So, the Color App is the major final project of the course. We will be combining a bunch of concepts that we've learned so far, as well as learning new tools, concepts, and packages to create a version of a couple of color UI websites!
+
+In our app, we will be able to view a palette, copy colors, create new palettes, etc. And we use a slider to change the brightness of the colors!
+
+### New Stuff We'll Cover
+
+* Material-UI
+  * Library of React components which take HTML, CSS, and JS and combine it together to make useful components
+* Chroma.js
+  * Library useful for converting colors to different formats (i.e rgba to hex); also generating relevant shades for color
+* Emoji-mart
+  * Library for picking emojis
+* react-sortable-hox (drag and drop)
+  * Different drag and drop libraries but we'll be using this one
+* React Pure Components
+  * Another type of component that helps you prevent unnecessary re-renders
+* Form validations
+  * Helps validate forms (no blanks, no duplicates, etc.)
+* Transition group (react-transition-group)
+  * Helps us fade components in and out, also helps us transition between routes
+* JSS
+  * not going to write much CSS, will write styles using JSS
+  * Write JS to describe our styles
+  * Why?
+    * All of our class names will be scoped to each individual component
+    * Can write dynamic styles! Fcns to change how something displays
+
+### Creating the Palette Component
+
+Started by building a single component that shows colors. We were given a seedColors file that had the specs for a few colors preloaded, we just had to figure out how to display them.
+
+Created a basic template of a Palette component w/ Navbar, div for color boxes, and footer
+
+### Color Box Basics
+
+Created simple ColorBox component where we pass colors down from palette component to ColorBox
+
+### Styling
+
+Added some basic CSS styling which would take me a while to figure out on my own haha
+
+### Copying to Clipboard
+
+Used `react-copy-to-clipboard`'s CopyToClipboard element. Wrapped the whole return div in ColorBox in a `<CopyToClipboard>` element to utilize the feature!
+
+### Copy Overlay Animation
+
+Right now, we can copy but there is no feedback to the user when you actually copy! We want to implement a background that grows from where we click; a background that doesn't show, then when clicked it appears. Do this by using a separate div (b.c if you do same div then all the existing content will scale too)
+
+In order to implement this, we need to use state!
+
+Colt's version (class based components) used setState(state, callback) to make the callback change state back after some time delay. BUT, with hooks and functional components, we can't pass callbacks! Instead,
+
+```javascript
+const changeCopyState = () => {
+  setCopied(true);
+  setTimeout(() => setCopied(false), 1500);
+}
+```
+
+### Generating Shades of Colors
+
+At this point, color box only worked w/ one color, we weren't generating different shades (and different formats for colors). So this section was focused on taking our Palette component and changing it to include all colors!
+
+To do this we used **chroma.js (chroma-js)**. Used `scale()` to create scales of colors. the algorithm for which was quite interesting:
+
+```javascript
+function getRange(hexColor) {
+    const end = "#fff";
+    return [
+        chroma(hexColor).darken(1.4).hex(), //darken colors instead of starting from black
+        hexColor,
+        end
+    ];
+}
+
+function getScale(hexColor, numberOfColors) {
+    return chroma
+        .scale(getRange(hexColor))
+        .mode('lab')
+        .colors(numberOfColors);
+}
+```
+
+We then used that helper function to generate a new Palette with all the different shades of colors
+
+```javascript
+const levels = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
+
+function generatePalette(starterPalette) {
+    let newPalette = {
+        paletteName: starterPalette.paletteName,
+        id: starterPalette.id,
+        emoji: starterPalette.emoji,
+        colors: {}
+    };
+
+    for (let level of levels) {
+        newPalette.colors[level] = [];
+    }
+    for (let color of starterPalette.colors) {
+        let scale = getScale(color.color, 10).reverse();
+        for (let i in scale) {
+            newPalette.colors[levels[i]].push({
+                name: `${color.name} ${levels[i]}`,
+                id: color.name.toLowerCase().replace(/ /g, "-"),
+                hex: scale[i],
+                rgb: chroma(scale[i]).css(),
+                rgba: chroma(scale[i]).css().replace("rgb", "rgba").replace(")", ",1.0)")
+            });
+        }
+    }
+    return newPalette
+}
+```
+
+Then, pass the new generated palette down to the Palette component!
+
+### Adding Color Slider
+
+We want a slider to change the shades of the colors... how do we do this? Use ***rc-slider***!
+
+Use the `level` state variable to keep track of what level to show and change the state whenever the slider value changes
+
+```javascript
+<Slider defaultValue={level} min={100} max={900} step={100} onAfterChange={changeLevel} />
+```
+
+### Styling Color Slider
+
+Downside of using a library like `rc-slider` is that if you want custom styles, you sometimes have to battle w/ the CSS from the library. To fix this you can either use the new inline styles (for `rc-slider`) or you can import the `Palette.css` ***AFTER*** the `package.css`
+
+### Adding Navbar Component
+
+Wasn't too complicated, added a Navbar component with some divs for styling and a button for main page.
