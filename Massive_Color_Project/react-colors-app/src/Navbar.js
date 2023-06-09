@@ -1,16 +1,41 @@
 import 'rc-slider/assets/index.css';
 import './Navbar.css'
 import Slider from 'rc-slider';
-import { Select, MenuItem } from '@mui/material';
-import { useState } from 'react';
+import { Select, MenuItem, Snackbar, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import React, { useState } from 'react';
 
 const Navbar = (props) => {
     const { level, changeLevel, changeColorFormat } = props;
-    const [format, setFormat] = useState("hex");
-    const handleChange = (e) => {
-        setFormat(e.target.value);
+    const [state, setState] = useState({
+        format: "hex",
+        open: false
+    });
+
+    const { format, open } = state;
+
+    const handleFormatChange = (e) => {
+        setState({ ...state, format: e.target.value, open: true });
         changeColorFormat(e.target.value);
     }
+    const closeSnackbar = () => {
+        setState({ ...state, open: false });
+    }
+
+    const action = (
+        <React.Fragment>
+            <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={closeSnackbar}
+                key="close"
+            >
+                <CloseIcon fontSize="small" />
+            </IconButton>
+        </React.Fragment>
+    );
+
     return (
         <nav className="Navbar">
             <div className="Navbar-logo">
@@ -46,12 +71,31 @@ const Navbar = (props) => {
                 </div>
             </div>
             <div className='select-container'>
-                <Select value={format} onChange={handleChange}>
+                <Select value={format} onChange={handleFormatChange}>
                     <MenuItem value="hex">HEX - #ffffff</MenuItem>
                     <MenuItem value="rgb">RGB - rgb(255, 255, 255)</MenuItem>
                     <MenuItem value="rgba">RGBA - rgba(255, 255, 255, 1.0)</MenuItem>
                 </Select>
             </div>
+
+            <Snackbar
+                anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                open={open}
+                autoHideDuration={3000}
+                message={<span id='message-id'>Format Changed To {format.toUpperCase()}</span>}
+                ContentProps={{
+                    "aria-describedby": "message-id"
+                }}
+                action={action}
+                onClose={closeSnackbar}
+            />
+            {/* <Snackbar
+                open={open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+                message="Note archived"
+                action={action}
+            /> */}
         </nav>
     )
 }
