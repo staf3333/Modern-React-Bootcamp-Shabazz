@@ -1,6 +1,7 @@
 import 'rc-slider/assets/index.css';
 import './Navbar.css'
 import Slider from 'rc-slider';
+import { Link } from 'react-router-dom';
 import { Select, MenuItem, Snackbar, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import React, { useState } from 'react';
@@ -39,7 +40,7 @@ const Navbar = (props) => {
     return (
         <nav className="Navbar">
             <div className="Navbar-logo">
-                <a href="/">reactcolorpicker</a>
+                <Link to="/">reactcolorpicker</Link>
             </div>
             <div className='slider-container'>
                 <span>level: {level}</span>
