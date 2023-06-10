@@ -1,15 +1,53 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import { Link } from 'react-router-dom';
 import MiniPalette from './MiniPalette';
 import TestEmotion from './TestEmotion';
 
+const styles = {
+    root: css({
+        backgroundColor: "blue",
+        height: "100%",
+        display: "flex",
+        alignItems: "flex-start",
+        justifyContent: "center"
+    }),
+    container: css({
+        width: "50%",
+        display: "flex",
+        alignItems: "flex-start",
+        flexDirection: "column",
+        flexWrap: "wrap"
+    }),
+    nav: css({
+        display: "flex",
+        width: "100%",
+        justifyContent: "space-between",
+        color: "white"
+    }),
+    palettes: css({
+        boxSizing: "border-box",
+        width: "100%",
+        display: "grid",
+        gridTemplateColumns: "repeat(3, 30%)",
+        gridGap: "5%"
+    })
+}
+
 const PaletteList = (props) => {
     const { palettes } = props;
     return (
-        <div>
-            <h1>React Colors</h1>
-            {palettes.map(palette => (
-                <MiniPalette {...palette} />
-            ))}
+        <div css={styles.root}>
+            <div css={styles.container}>
+                <nav css={styles.nav}>
+                    <h1>React Colors</h1>
+                </nav>
+                <div css={styles.palettes}>
+                    {palettes.map(palette => (
+                        <MiniPalette {...palette} />
+                    ))}
+                </div>
+            </div>
         </div>
     )
 }
