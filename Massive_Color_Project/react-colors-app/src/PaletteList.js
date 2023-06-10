@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import MiniPalette from './MiniPalette';
 import TestEmotion from './TestEmotion';
 
@@ -36,6 +36,12 @@ const styles = {
 
 const PaletteList = (props) => {
     const { palettes } = props;
+    const navigate = useNavigate();
+
+    const goToPalette = (id) => {
+        navigate(`/palette/${id}`);
+    }
+
     return (
         <div css={styles.root}>
             <div css={styles.container}>
@@ -44,7 +50,7 @@ const PaletteList = (props) => {
                 </nav>
                 <div css={styles.palettes}>
                     {palettes.map(palette => (
-                        <MiniPalette {...palette} />
+                        <MiniPalette {...palette} handleClick={() => goToPalette(palette.id)} />
                     ))}
                 </div>
             </div>
