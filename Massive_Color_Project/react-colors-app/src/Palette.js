@@ -13,7 +13,13 @@ const Palette = (props) => {
     const { id } = props;
     const { level, format } = state;
     const colorBoxes = colors[level].map(color => (
-        <ColorBox background={color[format]} colorId={color.id} name={color.name} paletteId={id} key={color.id} />
+        <ColorBox
+            background={color[format]}
+            showLink={true}
+            colorId={color.id}
+            name={color.name}
+            paletteId={id}
+            key={color.id} />
     ));
     const changeLevel = (newLevel) => {
         setState({ ...state, level: newLevel });
