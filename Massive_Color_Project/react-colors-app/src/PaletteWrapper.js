@@ -13,7 +13,7 @@ const PaletteWrapper = () => {
     const { id } = useParams();
     const palette = generatePalette(findPalette(id));
 
-    return <Palette palette={palette} />
+    return <Palette palette={palette} id={id} />
 }
 
 export default PaletteWrapper;

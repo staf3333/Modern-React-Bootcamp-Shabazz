@@ -10,9 +10,10 @@ const Palette = (props) => {
         format: "hex"
     })
     const { colors, paletteName, emoji } = props.palette;
+    const { id } = props;
     const { level, format } = state;
     const colorBoxes = colors[level].map(color => (
-        <ColorBox background={color[format]} name={color.name} key={color.id} />
+        <ColorBox background={color[format]} colorId={color.id} name={color.name} paletteId={id} key={color.id} />
     ));
     const changeLevel = (newLevel) => {
         setState({ ...state, level: newLevel });

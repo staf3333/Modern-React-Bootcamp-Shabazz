@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const ColorBox = (props) => {
-    const { name, background } = props;
+    const { name, background, paletteId, colorId } = props;
     const [copied, setCopied] = useState(false);
     // useEffect(() => {
     //     setTimeout(setCopied(false), 1500);
@@ -27,7 +27,7 @@ const ColorBox = (props) => {
                     </div>
                     <button className='copy-button'>Copy</button>
                 </div>
-                <Link to='/' onClick={e => e.stopPropagation()}>
+                <Link to={`/palette/${paletteId}/${colorId}`} onClick={e => e.stopPropagation()}>
                     <span className='see-more'>More</span>
                 </Link>
             </div>

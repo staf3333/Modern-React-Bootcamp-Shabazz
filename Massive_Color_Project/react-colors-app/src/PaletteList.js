@@ -2,7 +2,6 @@
 import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
 import MiniPalette from './MiniPalette';
-import TestEmotion from './TestEmotion';
 
 const styles = {
     root: css({
