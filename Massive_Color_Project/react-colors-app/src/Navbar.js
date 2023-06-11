@@ -7,7 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import React, { useState } from 'react';
 
 const Navbar = (props) => {
-    const { level, changeLevel, changeColorFormat } = props;
+    const { level, changeLevel, changeColorFormat, showingAllColors } = props;
     const [state, setState] = useState({
         format: "hex",
         open: false
@@ -42,35 +42,38 @@ const Navbar = (props) => {
             <div className="Navbar-logo">
                 <Link to="/">reactcolorpicker</Link>
             </div>
-            <div className='slider-container'>
-                <span>level: {level}</span>
-                <div className='slider'>
-                    <Slider
-                        defaultValue={level}
-                        min={100}
-                        max={900}
-                        step={100}
-                        onAfterChange={changeLevel}
-                        trackStyle={{ backgroundColor: "transparent" }}
-                        railStyle={{ height: "8px" }}
-                        handleStyle={{
-                            backgroundColor: "green",
-                            outline: "none",
-                            border: "2px solid green",
-                            boxShadow: "none",
-                            width: "13px",
-                            height: "13px",
-                            marginLeft: "-7px",
-                            marginTop: "-3px"
-                        }}
-                        activeDotStyle={{
-                            borderColor: 'green',
-                            boxShadow: 'none',
-                            outline: 'none'
-                        }}
-                    />
+            {showingAllColors && (
+                <div className='slider-container'>
+                    <span>level: {level}</span>
+                    <div className='slider'>
+                        <Slider
+                            defaultValue={level}
+                            min={100}
+                            max={900}
+                            step={100}
+                            onAfterChange={changeLevel}
+                            trackStyle={{ backgroundColor: "transparent" }}
+                            railStyle={{ height: "8px" }}
+                            handleStyle={{
+                                backgroundColor: "green",
+                                outline: "none",
+                                border: "2px solid green",
+                                boxShadow: "none",
+                                width: "13px",
+                                height: "13px",
+                                marginLeft: "-7px",
+                                marginTop: "-3px"
+                            }}
+                            activeDotStyle={{
+                                borderColor: 'green',
+                                boxShadow: 'none',
+                                outline: 'none'
+                            }}
+                        />
+                    </div>
                 </div>
-            </div>
+            )}
+
             <div className='select-container'>
                 <Select value={format} onChange={handleFormatChange}>
                     <MenuItem value="hex">HEX - #ffffff</MenuItem>
