@@ -13,7 +13,7 @@ const SingleColorPaletteWrapper = () => {
     const { paletteId, colorId } = useParams();
     const palette = generatePalette(findPalette(paletteId));
 
-    return <SingleColorPalette palette={palette} colorId={colorId} showLink={false} />
+    return <SingleColorPalette palette={palette} paletteId={paletteId} colorId={colorId} showLink={false} />
 }
 
 export default SingleColorPaletteWrapper;

@@ -49,7 +49,7 @@ const PaletteList = (props) => {
                 </nav>
                 <div css={styles.palettes}>
                     {palettes.map(palette => (
-                        <MiniPalette {...palette} handleClick={() => goToPalette(palette.id)} />
+                        <MiniPalette {...palette} key={palette.id} handleClick={() => goToPalette(palette.id)} />
                     ))}
                 </div>
             </div>

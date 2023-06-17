@@ -2,12 +2,13 @@ import { useState } from 'react';
 import ColorBox from './ColorBox';
 import Navbar from './Navbar';
 import PaletteFooter from './PaletteFooter';
+import { Link } from 'react-router-dom';
 
 const SingleColorPalette = (props) => {
     const [state, setState] = useState({
         format: "hex"
     })
-    const { palette, colorId } = props;
+    const { palette, colorId, paletteId } = props;
     const { paletteName, emoji } = palette;
     const gatherShades = (palette, colorToFilterBy) => {
         //return all shades of given color
@@ -33,13 +34,16 @@ const SingleColorPalette = (props) => {
         />
     ))
     return (
-        <div className='Palette'>
+        <div className='SingleColorPalette Palette'>
             <Navbar
                 changeColorFormat={changeColorFormat}
                 showingAllColors={false}
             />
             <div className='Palette-colors'>
                 {colorBoxes}
+                <div className='go-back ColorBox'>
+                    <Link to={`/palette/${paletteId}`} className='back-button'>GO BACK</Link>
+                </div>
             </div>
             <PaletteFooter paletteName={paletteName} emoji={emoji} />
         </div>
