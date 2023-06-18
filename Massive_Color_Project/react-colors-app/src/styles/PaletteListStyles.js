@@ -8,7 +8,7 @@ export default {
         justifyContent: "center"
     }),
     container: css({
-        width: "50%",
+        width: "60%",
         display: "flex",
         alignItems: "flex-start",
         flexDirection: "column",
@@ -18,13 +18,17 @@ export default {
         display: "flex",
         width: "100%",
         justifyContent: "space-between",
-        color: "white"
+        color: "white",
+        alignItems: "center",
+        "& a": {
+            color: "white"
+        }
     }),
     palettes: css({
         boxSizing: "border-box",
         width: "100%",
         display: "grid",
-        gridTemplateColumns: "repeat(3, 30%)",
-        gridGap: "5%"
+        gridTemplateColumns: "repeat(3, 1fr)",
+        gap: "5%"
     })
 }

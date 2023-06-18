@@ -3,12 +3,14 @@ import PaletteList from './PaletteList';
 import seedColors from './seedColors';
 import { Routes, Route } from 'react-router-dom';
 import PaletteWrapper from './PaletteWrapper';
+import NewPaletteForm from './NewPaletteForm';
 import SingleColorPaletteWrapper from './SingleColorPaletteWrapper';
 
 function App() {
   return (
     <Routes>
       <Route path='/' element={<PaletteList palettes={seedColors} />} />
+      <Route path='/palette/new' element={<NewPaletteForm />} />
       <Route path='/palette/:id' element={<PaletteWrapper />} />
       <Route path='/palette/:paletteId/:colorId' element={<SingleColorPaletteWrapper />} />
     </Routes>
