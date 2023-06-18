@@ -1,5 +1,5 @@
 import 'rc-slider/assets/index.css';
-import './Navbar.css'
+import './styles/Navbar.css'
 import Slider from 'rc-slider';
 import { Link } from 'react-router-dom';
 import { Select, MenuItem, Snackbar, IconButton } from '@mui/material';

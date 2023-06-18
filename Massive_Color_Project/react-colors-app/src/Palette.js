@@ -2,7 +2,7 @@ import React from 'react';
 import ColorBox from './ColorBox';
 import Navbar from './Navbar';
 import PaletteFooter from './PaletteFooter';
-import './Palette.css';
+import './styles/Palette.css';
 import { useState } from 'react';
 
 const Palette = (props) => {

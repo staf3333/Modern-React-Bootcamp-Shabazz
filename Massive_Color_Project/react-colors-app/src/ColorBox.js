@@ -1,4 +1,4 @@
-import './ColorBox.css';
+import './styles/ColorBox.css';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
