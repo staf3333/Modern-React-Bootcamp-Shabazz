@@ -126,7 +126,12 @@ const NewPaletteForm = (props) => {
         navigate('/');
     }
 
-
+    const removeColor = (colorName) => {
+        setState({
+            ...state,
+            colors: colors.filter(color => color.name !== colorName)
+        });
+    }
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -213,12 +218,16 @@ const NewPaletteForm = (props) => {
                         Add Color
                     </Button>
                 </ValidatorForm>
-
             </Drawer>
             <Main open={open}>
                 <DrawerHeader />
                 {colors.map(color => (
-                    <DraggableColorBox color={color.color} name={color.name} />
+                    <DraggableColorBox
+                        color={color.color}
+                        name={color.name}
+                        key={color.name}
+                        handleClick={() => removeColor(color.name)}
+                    />
                 ))}
             </Main>
         </Box>
