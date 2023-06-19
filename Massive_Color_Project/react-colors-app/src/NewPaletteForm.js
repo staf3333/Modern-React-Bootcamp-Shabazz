@@ -15,6 +15,7 @@ import { ChromePicker } from 'react-color';
 import { Button } from '@mui/material';
 import DraggableColorList from "./DraggableColorList";
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import PaletteList from './PaletteList';
 
 
 const drawerWidth = 400;
@@ -72,7 +73,7 @@ const NewPaletteForm = (props) => {
         newColorName: "",
         newPaletteName: "",
     });
-    const [colors, setColors] = useState([]);
+    const [colors, setColors] = useState(props.palettes[0].colors);
     const { open, currentColor, newColorName, newPaletteName } = state;
     const navigate = useNavigate();
 
@@ -108,13 +109,24 @@ const NewPaletteForm = (props) => {
 
     const addNewColor = () => {
         const newColor = { color: currentColor, name: newColorName };
-        // setState({ ...state, colors: [...colors, newColor], newColorName: "" });
         setColors(colors.concat(newColor));
-    }
+    };
 
     const handleChange = (evt) => {
         setState({ ...state, [evt.target.name]: evt.target.value })
-    }
+    };
+
+    const clearColors = () => {
+        setColors([]);
+    };
+
+    const addRandomColor = () => {
+        //pcik random color form existing palettes
+        const allColors = props.palettes.map(p => p.colors).flat();
+        const rand = Math.floor(Math.random() * allColors.length);
+        const randomColor = allColors[rand];
+        setColors([...colors, randomColor]);
+    };
 
     const handleSubmit = () => {
         let newName = newPaletteName;
@@ -125,15 +137,14 @@ const NewPaletteForm = (props) => {
         };
         props.savePalette(newPalette);
         navigate('/');
-    }
+    };
 
     const removeColor = (colorName) => {
-        // setState({
-        //     ...state,
-        //     colors: colors.filter(color => color.name !== colorName)
-        // });
         setColors(colors.filter((color) => color.name !== colorName));
-    }
+    };
+
+    const { maxColors } = props;
+    const paletteIsFull = colors.length >= maxColors;
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -193,8 +204,21 @@ const NewPaletteForm = (props) => {
                 <Divider />
                 <Typography variant='h4'>Design Your Palette</Typography>
                 <div>
-                    <Button variant='contained' color="secondary">Clear Palette</Button>
-                    <Button variant='contained' color="primary">Random Palette</Button>
+                    <Button
+                        variant='contained'
+                        color="secondary"
+                        onClick={clearColors}
+                    >
+                        Clear Palette
+                    </Button>
+                    <Button
+                        variant='contained'
+                        color="primary"
+                        onClick={addRandomColor}
+                        disabled={paletteIsFull}
+                    >
+                        Random Color
+                    </Button>
                 </div>
                 <ChromePicker
                     color={currentColor}
@@ -214,10 +238,15 @@ const NewPaletteForm = (props) => {
                     <Button
                         variant='contained'
                         color='primary'
-                        style={{ backgroundColor: currentColor }}
+                        style={{
+                            backgroundColor: paletteIsFull
+                                ? "grey"
+                                : currentColor
+                        }}
                         type='submit'
+                        disabled={paletteIsFull}
                     >
-                        Add Color
+                        {paletteIsFull ? "Palette Full" : "Add Color"}
                     </Button>
                 </ValidatorForm>
             </Drawer>
@@ -232,5 +261,9 @@ const NewPaletteForm = (props) => {
         </Box>
     );
 }
+
+NewPaletteForm.defaultProps = {
+    maxColors: 20
+};
 
 export default NewPaletteForm;
