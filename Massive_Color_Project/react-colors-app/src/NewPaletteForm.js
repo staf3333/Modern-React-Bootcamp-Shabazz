@@ -13,7 +13,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { ChromePicker } from 'react-color';
 import { Button } from '@mui/material';
-import DraggableColorBox from './DraggableColorBox';
+import DraggableColorList from "./DraggableColorList";
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 
@@ -71,9 +71,9 @@ const NewPaletteForm = (props) => {
         currentColor: "teal",
         newColorName: "",
         newPaletteName: "",
-        colors: []
     });
-    const { open, currentColor, colors, newColorName, newPaletteName } = state;
+    const [colors, setColors] = useState([]);
+    const { open, currentColor, newColorName, newPaletteName } = state;
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -108,7 +108,8 @@ const NewPaletteForm = (props) => {
 
     const addNewColor = () => {
         const newColor = { color: currentColor, name: newColorName };
-        setState({ ...state, colors: [...colors, newColor], newColorName: "" });
+        // setState({ ...state, colors: [...colors, newColor], newColorName: "" });
+        setColors(colors.concat(newColor));
     }
 
     const handleChange = (evt) => {
@@ -127,10 +128,11 @@ const NewPaletteForm = (props) => {
     }
 
     const removeColor = (colorName) => {
-        setState({
-            ...state,
-            colors: colors.filter(color => color.name !== colorName)
-        });
+        // setState({
+        //     ...state,
+        //     colors: colors.filter(color => color.name !== colorName)
+        // });
+        setColors(colors.filter((color) => color.name !== colorName));
     }
 
     return (
@@ -221,14 +223,11 @@ const NewPaletteForm = (props) => {
             </Drawer>
             <Main open={open}>
                 <DrawerHeader />
-                {colors.map(color => (
-                    <DraggableColorBox
-                        color={color.color}
-                        name={color.name}
-                        key={color.name}
-                        handleClick={() => removeColor(color.name)}
-                    />
-                ))}
+                <DraggableColorList
+                    colors={colors}
+                    setColors={setColors}
+                    removeColor={removeColor}
+                />
             </Main>
         </Box>
     );
