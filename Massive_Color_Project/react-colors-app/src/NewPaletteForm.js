@@ -1,4 +1,6 @@
+/** @jsxImportSource @emotion/react */
 import { useState } from 'react';
+import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -41,6 +43,23 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
 }));
+
+const styles = {
+    container: css({
+        width: "90%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
+    }),
+    buttons: css({
+        width: "100%"
+    }),
+    button: css({
+        width: "50%"
+    })
+}
 
 const NewPaletteForm = (props) => {
     const [state, setState] = useState({
@@ -106,6 +125,8 @@ const NewPaletteForm = (props) => {
                     '& .MuiDrawer-paper': {
                         width: drawerWidth,
                         boxSizing: 'border-box',
+                        display: "flex",
+                        alignItems: "center"
                     },
                 }}
                 variant="persistent"
@@ -118,23 +139,27 @@ const NewPaletteForm = (props) => {
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
-                <Typography variant='h4'>Design Your Palette</Typography>
-                <div>
-                    <Button
-                        variant='contained'
-                        color="secondary"
-                        onClick={clearColors}
-                    >
-                        Clear Palette
-                    </Button>
-                    <Button
-                        variant='contained'
-                        color="primary"
-                        onClick={addRandomColor}
-                        disabled={paletteIsFull}
-                    >
-                        Random Color
-                    </Button>
+                <div css={styles.container}>
+                    <Typography variant='h4' gutterBottom>Design Your Palette</Typography>
+                    <div css={styles.buttons}>
+                        <Button
+                            variant='contained'
+                            color="secondary"
+                            onClick={clearColors}
+                            css={styles.button}
+                        >
+                            Clear Palette
+                        </Button>
+                        <Button
+                            variant='contained'
+                            color="primary"
+                            onClick={addRandomColor}
+                            disabled={paletteIsFull}
+                            css={styles.button}
+                        >
+                            Random Color
+                        </Button>
+                    </div>
                     <ColorPickerForm
                         paletteIsFull={paletteIsFull}
                         addNewColor={addNewColor}
