@@ -3,15 +3,16 @@ import { useParams } from 'react-router-dom';
 import seedColors from './seedColors';
 import SingleColorPalette from './SingleColorPalette';
 
-const findPalette = id => {
-    return seedColors.find(function (palette) {
+const findPalette = (palettes, id) => {
+    return palettes.find(function (palette) {
         return palette.id === id;
     });
 }
 
-const SingleColorPaletteWrapper = () => {
+const SingleColorPaletteWrapper = (props) => {
     const { paletteId, colorId } = useParams();
-    const palette = generatePalette(findPalette(paletteId));
+    const { palettes } = props;
+    const palette = generatePalette(findPalette(palettes, paletteId));
 
     return <SingleColorPalette palette={palette} paletteId={paletteId} colorId={colorId} showLink={false} />
 }
