@@ -1,4 +1,6 @@
+/** @jsxImportSource @emotion/react */
 import { useState, useEffect } from 'react';
+import { css } from '@emotion/react';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -19,6 +21,9 @@ const AppBar = styled(MuiAppBar, {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
     }),
+    flexDirection: "row",
+    justifyContent: "space-between",
+    height: "64px",
     ...(open && {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: `${drawerWidth}px`,
@@ -28,6 +33,15 @@ const AppBar = styled(MuiAppBar, {
         }),
     }),
 }));
+
+const styles = {
+    root: css({
+        display: "flex"
+    }),
+    navBtns: css({
+
+    })
+}
 
 const PaletteFormNav = (props) => {
     const [state, setState] = useState({
@@ -46,8 +60,6 @@ const PaletteFormNav = (props) => {
         setState({ ...state, [evt.target.name]: evt.target.value })
     };
 
-
-
     const { open, handleSubmit, handleDrawerOpen } = props;
     const { newPaletteName } = state;
     return (
@@ -65,8 +77,10 @@ const PaletteFormNav = (props) => {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        Persistent drawer
+                        Create a Palette
                     </Typography>
+                </Toolbar>
+                <div css={styles.navBtns}>
                     <ValidatorForm onSubmit={() => handleSubmit(newPaletteName)}>
                         <TextValidator
                             name="newPaletteName"
@@ -84,11 +98,11 @@ const PaletteFormNav = (props) => {
                         >
                             Save Palette
                         </Button>
-                        <Link to="/">
-                            <Button variant='container' color='secondary'>Go Back</Button>
-                        </Link>
                     </ValidatorForm>
-                </Toolbar>
+                    <Link to="/">
+                        <Button variant='container' color='secondary'>Go Back</Button>
+                    </Link>
+                </div>
             </AppBar>
         </div>
     )

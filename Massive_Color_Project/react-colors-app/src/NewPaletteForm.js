@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -13,7 +13,6 @@ import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
 
 const drawerWidth = 400;
-
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
         flexGrow: 1,
