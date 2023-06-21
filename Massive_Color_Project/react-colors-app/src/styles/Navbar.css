@@ -31,3 +31,15 @@
     margin-left: auto;
     margin-right: 1rem;
 }
+
+@media screen and (max-width: 992px) {
+    .slider {
+        width: 150px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .Navbar-logo {
+        display: none;
+    }
+}
