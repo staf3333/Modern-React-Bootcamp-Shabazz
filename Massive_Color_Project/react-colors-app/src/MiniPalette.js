@@ -3,10 +3,10 @@ import miniPaletteCss from './styles/MiniPaletteStyles';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const MiniPalette = (props) => {
-    const { paletteName, emoji, colors, handleClick, handleDelete, id } = props;
+    const { paletteName, emoji, colors, handleClick, openDialog, id } = props;
     const deletePalette = (e) => {
         e.stopPropagation();
-        handleDelete(id);
+        openDialog(id);
     }
     const miniColorBoxes = colors.map(color => (
         <div
