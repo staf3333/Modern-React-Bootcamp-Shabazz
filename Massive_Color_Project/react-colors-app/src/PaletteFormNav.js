@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useState, useEffect } from 'react';
-import { css } from '@emotion/react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,7 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Button } from '@mui/material';
 import PaletteMetaForm from './PaletteMetaForm';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import styles from './styles/PaletteFormNavStyles';
 
 const drawerWidth = 400;
 
@@ -36,24 +35,10 @@ const AppBar = styled(MuiAppBar, {
     }),
 }));
 
-const styles = {
-    root: css({
-        display: "flex"
-    }),
-    navBtns: css({
-        marginRight: "1rem",
-        "& a": {
-            textDecoration: "none"
-        }
-    }),
-    button: css({
-        margin: "0 0.5rem",
-    })
-}
+
 
 const PaletteFormNav = (props) => {
     const [state, setState] = useState({
-        newPaletteName: "",
         formShowing: false
     });
 
@@ -65,7 +50,7 @@ const PaletteFormNav = (props) => {
     }
 
     const { open, handleSubmit, handleDrawerOpen, palettes } = props;
-    const { newPaletteName, formShowing } = state;
+    const { formShowing } = state;
     return (
         <div>
             <CssBaseline />

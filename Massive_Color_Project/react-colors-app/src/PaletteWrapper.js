@@ -1,6 +1,5 @@
 import { generatePalette } from './colorHelpers';
 import { useParams } from 'react-router-dom';
-import seedColors from './seedColors';
 import Palette from './Palette';
 
 const findPalette = (palettes, id) => {

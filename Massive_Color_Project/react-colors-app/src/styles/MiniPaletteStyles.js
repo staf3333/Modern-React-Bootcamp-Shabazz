@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-export default {
+const styles = {
     root: css({
         backgroundColor: "white",
         borderRadius: "5px",
@@ -40,3 +40,5 @@ export default {
         marginBottom: "-3.5px"
     })
 }
+
+export default styles;

@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from 'react';
-import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -13,6 +12,7 @@ import { Button } from '@mui/material';
 import DraggableColorList from "./DraggableColorList";
 import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
+import styles from './styles/NewPaletteFormStyles';
 
 const drawerWidth = 400;
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -44,29 +44,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end',
 }));
 
-const styles = {
-    container: css({
-        width: "90%",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center"
-    }),
-    buttons: css({
-        width: "100%"
-    }),
-    button: css({
-        width: "50%"
-    })
-}
-
 const NewPaletteForm = (props) => {
     const [state, setState] = useState({
         open: true,
     });
     const [colors, setColors] = useState(props.palettes[0].colors);
-    const { open, currentColor, newColorName, newPaletteName } = state;
+    const { open } = state;
     const navigate = useNavigate();
 
     const handleDrawerClose = () => {

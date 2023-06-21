@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-export default {
+
+const styles = {
     root: css({
         backgroundColor: "blue",
         height: "100vh",
@@ -32,3 +33,5 @@ export default {
         gap: "5%"
     })
 }
+
+export default styles;
