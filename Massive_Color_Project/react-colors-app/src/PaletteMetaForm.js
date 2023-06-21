@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
 import Avatar from '@mui/material/Avatar';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -20,7 +23,7 @@ const emails = ['username@gmail.com', 'user02@gmail.com'];
 const PaletteMetaForm = (props) => {
     const [state, setState] = useState({
         newPaletteName: "",
-        open: false
+        open: true
     });
     const [selectedValue, setSelectedValue] = useState(emails[1]);
 
@@ -50,26 +53,26 @@ const PaletteMetaForm = (props) => {
     const { handleSubmit } = props;
 
     return (
-        <div>
-            <Typography variant="subtitle1" component="div">
-                Selected: {selectedValue}
-            </Typography>
-            <br />
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Open simple dialog
-            </Button>
-            <Dialog onClose={handleClose} open={open}>
-                <DialogTitle>Set backup account</DialogTitle>
-                <ValidatorForm onSubmit={() => handleSubmit(newPaletteName)}>
+        <Dialog onClose={handleClose} open={open}>
+            <DialogTitle>Set backup account</DialogTitle>
+            <ValidatorForm onSubmit={() => handleSubmit(newPaletteName)}>
+                <DialogContent>
+                    <DialogContentText>
+                        Please enter a name for your beautiful new palette. Make sure it's unique!
+                    </DialogContentText>
+
                     <TextValidator
                         name="newPaletteName"
                         label="Palette Name"
                         value={newPaletteName}
                         onChange={handleChange}
+                        fullWidth
+                        margin="normal"
                         validators={["required", "isPaletteNameUnique"]}
                         errorMessages={["Enter Palette Name", "Name already used"]}
                     />
-
+                </DialogContent>
+                <DialogActions>
                     <Button
                         variant='contained'
                         color='primary'
@@ -77,14 +80,9 @@ const PaletteMetaForm = (props) => {
                     >
                         Save Palette
                     </Button>
-                </ValidatorForm>
-            </Dialog>
-            {/* <SimpleDialog
-                selectedValue={selectedValue}
-                open={open}
-                onClose={handleClose}
-            /> */}
-        </div >
+                </DialogActions>
+            </ValidatorForm>
+        </Dialog>
     );
 }
 

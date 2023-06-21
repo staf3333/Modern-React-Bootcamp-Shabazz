@@ -24,6 +24,7 @@ const AppBar = styled(MuiAppBar, {
     }),
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     height: "64px",
     ...(open && {
         width: `calc(100% - ${drawerWidth}px)`,
@@ -40,17 +41,28 @@ const styles = {
         display: "flex"
     }),
     navBtns: css({
-
+        marginRight: "1rem",
+        "& a": {
+            textDecoration: "none"
+        }
+    }),
+    button: css({
+        margin: "0 0.5rem",
     })
 }
 
 const PaletteFormNav = (props) => {
     const [state, setState] = useState({
         newPaletteName: "",
+        formShowing: false
     });
 
+    const showForm = () => {
+        setState({ ...state, formShowing: true });
+    }
+
     const { open, handleSubmit, handleDrawerOpen, palettes } = props;
-    const { newPaletteName } = state;
+    const { newPaletteName, formShowing } = state;
     return (
         <div>
             <CssBaseline />
@@ -69,14 +81,18 @@ const PaletteFormNav = (props) => {
                         Create a Palette
                     </Typography>
                 </Toolbar>
-                <div css={styles.navBtns}>
 
-                    <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} />
-                    <Link to="/">
-                        <Button variant='container' color='secondary'>Go Back</Button>
+                <div css={styles.navBtns}>
+                    <Link to="/" css={styles.link}>
+                        <Button css={styles.button} variant='contained' color='secondary'>Go Back</Button>
                     </Link>
+                    <Button variant="contained" onClick={showForm} css={styles.button}>
+                        Save
+                    </Button>
                 </div>
             </AppBar>
+            {formShowing && <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} />}
+
         </div>
     )
 }
