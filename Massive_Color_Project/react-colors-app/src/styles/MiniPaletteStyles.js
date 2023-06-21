@@ -40,9 +40,6 @@ const styles = {
         position: "relative",
         marginBottom: "-3.5px"
     }),
-    delete: css({
-
-    }),
     deleteIcon: css({
         color: "white",
         backgroundColor: "#eb3d30",

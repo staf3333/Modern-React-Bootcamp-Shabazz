@@ -5,7 +5,7 @@ import styles from "./styles/PaletteListStyles";
 
 
 const PaletteList = (props) => {
-    const { palettes } = props;
+    const { palettes, deletePalette } = props;
     const navigate = useNavigate();
 
     const goToPalette = (id) => {
@@ -21,7 +21,12 @@ const PaletteList = (props) => {
                 </nav>
                 <div css={styles.palettes}>
                     {palettes.map(palette => (
-                        <MiniPalette {...palette} key={palette.id} handleClick={() => goToPalette(palette.id)} />
+                        <MiniPalette
+                            {...palette}
+                            key={palette.id}
+                            handleClick={() => goToPalette(palette.id)}
+                            handleDelete={deletePalette}
+                        />
                     ))}
                 </div>
             </div>

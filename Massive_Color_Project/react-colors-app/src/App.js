@@ -13,6 +13,9 @@ function App() {
     palettes: savedPalettes || seedColors
   });
   const { palettes } = state;
+  const deletePalette = (id) => {
+    setState({ ...state, palettes: palettes.filter(palette => palette.id !== id) });
+  }
   const syncLocalStorage = () => {
     //save palettes to local storage
     window.localStorage.setItem("palettes", JSON.stringify(state.palettes));
@@ -22,12 +25,12 @@ function App() {
   }
   useEffect(() => {
     syncLocalStorage();
-  }, [state])
+  }, [state]);
 
 
   return (
     <Routes>
-      <Route path='/' element={<PaletteList palettes={palettes} />} />
+      <Route path='/' element={<PaletteList deletePalette={deletePalette} palettes={palettes} />} />
       <Route path='/palette/new' element={<NewPaletteForm savePalette={savePalette} palettes={palettes} />} />
       <Route path='/palette/:id' element={<PaletteWrapper palettes={palettes} />} />
       <Route path='/palette/:paletteId/:colorId' element={<SingleColorPaletteWrapper palettes={palettes} />} />
