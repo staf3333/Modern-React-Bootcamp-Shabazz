@@ -1,31 +1,19 @@
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import Avatar from '@mui/material/Avatar';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-import PersonIcon from '@mui/icons-material/Person';
-import AddIcon from '@mui/icons-material/Add';
-import Typography from '@mui/material/Typography';
-import { blue } from '@mui/material/colors';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-
-const emails = ['username@gmail.com', 'user02@gmail.com'];
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
 
 const PaletteMetaForm = (props) => {
     const [state, setState] = useState({
         newPaletteName: "",
         open: true
     });
-    const [selectedValue, setSelectedValue] = useState(emails[1]);
 
     const { newPaletteName, open } = state;
 
@@ -41,25 +29,26 @@ const PaletteMetaForm = (props) => {
         setState({ ...state, [evt.target.name]: evt.target.value })
     };
 
-    const handleClickOpen = () => {
-        setState({ ...state, open: true });
-    };
+    // const handleClickOpen = () => {
+    //     setState({ ...state, open: true });
+    // };
 
-    const handleClose = (value) => {
-        setState({ ...state, open: false });
-        setSelectedValue(value);
-    };
+    // const handleClose = (value) => {
+    //     setState({ ...state, open: false });
+    //     setSelectedValue(value);
+    // };
 
-    const { handleSubmit } = props;
+    const { handleSubmit, hideForm } = props;
 
     return (
-        <Dialog onClose={handleClose} open={open}>
+        <Dialog onClose={hideForm} open={open}>
             <DialogTitle>Set backup account</DialogTitle>
             <ValidatorForm onSubmit={() => handleSubmit(newPaletteName)}>
                 <DialogContent>
                     <DialogContentText>
                         Please enter a name for your beautiful new palette. Make sure it's unique!
                     </DialogContentText>
+                    <Picker data={data} onEmojiSelect={console.log} />
 
                     <TextValidator
                         name="newPaletteName"
@@ -73,6 +62,9 @@ const PaletteMetaForm = (props) => {
                     />
                 </DialogContent>
                 <DialogActions>
+                    <Button onClick={hideForm} color='primary'>
+                        Cancel
+                    </Button>
                     <Button
                         variant='contained'
                         color='primary'
