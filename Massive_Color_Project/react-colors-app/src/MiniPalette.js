@@ -5,7 +5,6 @@ import { memo } from 'react';
 
 const MiniPalette = memo((props) => {
     const { paletteName, emoji, colors, handleClick, openDialog, id } = props;
-    console.log("RENDERING: ", paletteName);
     const deletePalette = (e) => {
         e.stopPropagation();
         openDialog(id);

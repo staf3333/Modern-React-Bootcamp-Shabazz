@@ -3,10 +3,12 @@ import PaletteList from './PaletteList';
 import seedColors from './seedColors';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+
 import PaletteWrapper from './PaletteWrapper';
 import NewPaletteForm from './NewPaletteForm';
 import SingleColorPaletteWrapper from './SingleColorPaletteWrapper';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+
 import Page from './Page';
 
 function App() {

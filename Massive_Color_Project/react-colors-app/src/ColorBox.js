@@ -1,8 +1,8 @@
-import './styles/ColorBox.css';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import chroma from 'chroma-js';
+import './styles/ColorBox.css';
 
 const ColorBox = (props) => {
     const { name, background, paletteId, colorId, showLink } = props;

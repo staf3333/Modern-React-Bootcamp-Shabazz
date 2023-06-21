@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import MiniPalette from './MiniPalette';
-import styles from "./styles/PaletteListStyles";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -17,6 +16,7 @@ import Dialog from '@mui/material/Dialog';
 import blue from "@mui/material/colors/blue";
 import red from "@mui/material/colors/red";
 import { Global } from '@emotion/react';
+import styles from "./styles/PaletteListStyles";
 
 
 const PaletteList = (props) => {
