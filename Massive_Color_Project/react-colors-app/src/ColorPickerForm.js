@@ -49,7 +49,7 @@ const ColorPickerForm = (props) => {
                 onChangeComplete={updateCurrentColor}
                 css={styles.picker}
             />
-            <ValidatorForm onSubmit={handleSubmit}>
+            <ValidatorForm onSubmit={handleSubmit} instantValidate={false}>
                 <TextValidator
                     value={newColorName}
                     css={styles.colorNameInput}

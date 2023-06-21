@@ -12,6 +12,7 @@ import { Button } from '@mui/material';
 import DraggableColorList from "./DraggableColorList";
 import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
+import seedColors from './seedColors';
 import styles from './styles/NewPaletteFormStyles';
 
 const drawerWidth = 400;
@@ -49,7 +50,7 @@ const NewPaletteForm = (props) => {
     const [state, setState] = useState({
         open: true,
     });
-    const [colors, setColors] = useState(props.palettes[0].colors);
+    const [colors, setColors] = useState(seedColors[0].colors);
     const { open } = state;
     const navigate = useNavigate();
 
