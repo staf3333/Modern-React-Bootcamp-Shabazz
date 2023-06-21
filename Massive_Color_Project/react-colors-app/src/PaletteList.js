@@ -2,6 +2,8 @@
 import { useNavigate, Link } from 'react-router-dom';
 import MiniPalette from './MiniPalette';
 import styles from "./styles/PaletteListStyles";
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { Global } from '@emotion/react';
 
 
 const PaletteList = (props) => {
@@ -16,19 +18,22 @@ const PaletteList = (props) => {
         <div css={styles.root}>
             <div css={styles.container}>
                 <nav css={styles.nav}>
-                    <h1>React Colors</h1>
+                    <h1 css={styles.heading}>React Colors</h1>
                     <Link to='/palette/new'>Create Palette</Link>
                 </nav>
-                <div css={styles.palettes}>
+                <TransitionGroup css={styles.palettes}>
+                    <Global styles={styles.transitionStyles} />
                     {palettes.map(palette => (
-                        <MiniPalette
-                            {...palette}
-                            key={palette.id}
-                            handleClick={() => goToPalette(palette.id)}
-                            handleDelete={deletePalette}
-                        />
+                        <CSSTransition key={palette.id} classNames="fade" timeout={500}>
+                            <MiniPalette
+                                {...palette}
+                                key={palette.id}
+                                handleClick={() => goToPalette(palette.id)}
+                                handleDelete={deletePalette}
+                            />
+                        </CSSTransition>
                     ))}
-                </div>
+                </TransitionGroup>
             </div>
         </div>
     )

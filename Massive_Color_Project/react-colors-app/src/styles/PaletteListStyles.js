@@ -1,13 +1,30 @@
 import { css } from '@emotion/react';
 import sizes from './sizes';
+import confettiDoodles from './confettiDoodles.svg';
 
 const styles = {
     root: css({
-        backgroundColor: "blue",
         height: "100vh",
         display: "flex",
         alignItems: "flex-start",
-        justifyContent: "center"
+        justifyContent: "center",
+        backgroundColor: "#3318AA",
+        /* background by SVGBackgrounds.com */
+        backgroundImage: `url(${confettiDoodles})`,
+        backgroundAttachment: "fixed",
+        overflow: "scroll"
+    }),
+    transitionStyles: css({
+        ".fade-exit": {
+            opacity: 1
+        },
+        ".fade-exit-active": css({
+            opacity: 0,
+            transition: "opacity 500ms ease-out"
+        })
+    }),
+    heading: css({
+        fontSize: "2rem"
     }),
     container: css({
         width: "60%",
@@ -43,7 +60,7 @@ const styles = {
         },
         [sizes.down("xs")]: {
             gridTemplateColumns: "repeat(1, 100%)",
-            gap: "1rem"
+            gap: "1.4rem"
         }
     })
 }
