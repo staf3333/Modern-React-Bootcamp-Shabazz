@@ -61,6 +61,12 @@ function App() {
             </Page>
           }
           />
+          <Route index path='*' element={
+            <Page>
+              <PaletteList deletePalette={deletePalette} palettes={palettes} />
+            </Page>
+          }
+          />
         </Routes>
       </CSSTransition>
     </TransitionGroup>
