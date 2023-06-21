@@ -7,6 +7,7 @@ import PaletteWrapper from './PaletteWrapper';
 import NewPaletteForm from './NewPaletteForm';
 import SingleColorPaletteWrapper from './SingleColorPaletteWrapper';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import Page from './Page';
 
 function App() {
   const savedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
@@ -32,30 +33,30 @@ function App() {
 
   return (
     <TransitionGroup className="App" location={location}>
-      <CSSTransition key={location.key} classNames="fade" timeout={500}>
+      <CSSTransition key={location.key} classNames="page" timeout={500}>
         <Routes location={location}>
           <Route index path='/' element={
-            <div className='page'>
+            <Page>
               <PaletteList deletePalette={deletePalette} palettes={palettes} />
-            </div>
+            </Page>
           }
           />
           <Route path='/palette/new' element={
-            <div className='page'>
+            <Page>
               <NewPaletteForm savePalette={savePalette} palettes={palettes} />
-            </div>
+            </Page>
           }
           />
           <Route path='/palette/:id' element={
-            <div className='page'>
+            <Page>
               <PaletteWrapper palettes={palettes} />
-            </div>
+            </Page>
           }
           />
           <Route path='/palette/:paletteId/:colorId' element={
-            <div className='page'>
+            <Page>
               <SingleColorPaletteWrapper palettes={palettes} />
-            </div>
+            </Page>
           }
           />
         </Routes>

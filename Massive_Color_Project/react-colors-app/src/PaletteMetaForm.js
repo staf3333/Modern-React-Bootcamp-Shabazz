@@ -27,11 +27,11 @@ const PaletteMetaForm = (props) => {
     });
 
     const handleChange = (evt) => {
-        setState({ ...state, [evt.target.name]: evt.target.value })
+        setState({ ...state, [evt.target.name]: evt.target.value });
     };
 
     const showEmojiPicker = () => {
-        setState({ ...state, stage: "emoji" })
+        setState({ ...state, stage: "emoji" });
     }
 
     const savePalette = (emoji) => {
@@ -40,6 +40,7 @@ const PaletteMetaForm = (props) => {
             emoji: emoji.native
         };
         handleSubmit(newPalette);
+        setState({ ...state, stage: "" });
     }
 
     return (
