@@ -3,7 +3,7 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Grid from '@mui/material/Grid'
+import Grid from '@mui/material/Grid';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 
