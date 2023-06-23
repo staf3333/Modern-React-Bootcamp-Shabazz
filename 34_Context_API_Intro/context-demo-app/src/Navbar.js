@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Switch from '@mui/material/Switch';
-import { alpha, createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider, alpha } from '@mui/material/styles';
 import { css } from '@emotion/react';
 
 const styles = {
