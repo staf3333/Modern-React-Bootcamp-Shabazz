@@ -15,8 +15,12 @@ const styles = {
         [theme.breakpoints.up("sm")]: {
             width: 400,
             marginLeft: "auto",
-            marginRight: "auto"
+            marginRight: "auto",
         }
+    }),
+    avatar: theme => ({
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main
     }),
     paper: theme => ({
         marginTop: theme.spacing(8),
@@ -36,7 +40,6 @@ const styles = {
 }
 
 const theme = createTheme();
-
 const Form = () => {
     return (
         <ThemeProvider theme={theme}>
