@@ -8,6 +8,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import Switch from '@mui/material/Switch';
 import { createTheme, ThemeProvider, alpha } from '@mui/material/styles';
 import { css } from '@emotion/react';
+import { useContext } from 'react';
+import { ThemeContext } from './contexts/ThemeContext';
+import { LanguageContext } from './contexts/LanguageContext';
 
 const styles = {
     root: css({
@@ -77,19 +80,38 @@ const inputTheme = createTheme({
         },
     },
 });
+
+const content = {
+    english: {
+        search: "Search",
+        flag: "🇬🇧"
+    },
+    french: {
+        search: "Chercher",
+        flag: "🇫🇷"
+    },
+    spanish: {
+        search: "Buscar",
+        flag: "🇪🇸"
+    }
+};
+
 const Navbar = () => {
+    const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+    const { language } = useContext(LanguageContext)
+    const { search, flag } = content[language];
     return (
         <ThemeProvider theme={theme}>
             <div css={styles.root}>
-                <AppBar position='static' color='primary'>
+                <AppBar position='static' color={isDarkMode ? "default" : "primary"}>
                     <Toolbar>
                         <IconButton css={styles.menuButton} color='inherit'>
-                            <span>🇫🇷</span>
+                            <span>{flag}</span>
                         </IconButton>
                         <Typography css={styles.title} variant='h6' color='inherit'>
                             App Title
                         </Typography>
-                        <Switch />
+                        <Switch onChange={toggleTheme} />
                         <div css={styles.grow} />
                         <div css={styles.search}>
                             <div css={styles.searchIcon}>
@@ -97,7 +119,7 @@ const Navbar = () => {
                             </div>
                             <ThemeProvider theme={inputTheme}>
                                 <InputBase
-                                    placeholder='Search...'
+                                    placeholder={`${search}...`}
                                 />
                             </ThemeProvider>
                         </div>

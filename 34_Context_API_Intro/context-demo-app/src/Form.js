@@ -5,6 +5,29 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { LanguageContext } from "./contexts/LanguageContext";
+import { useContext } from "react";
+
+const words = {
+    english: {
+        signIn: "Sign In",
+        email: "Email Address",
+        password: "Password",
+        remember: "Remember Me"
+    },
+    french: {
+        signIn: "Se Connecter",
+        email: "Adresse Électronique",
+        password: "Mot de Passe",
+        remember: "Souviens-toi De Moi"
+    },
+    spanish: {
+        signIn: "Registrarse",
+        email: "Correo Electrónico",
+        password: "Contraseña",
+        remember: "Recuérdame"
+    }
+}
 
 const styles = {
     main: theme => ({
@@ -41,6 +64,8 @@ const styles = {
 
 const theme = createTheme();
 const Form = () => {
+    const { language, changeLanguage } = useContext(LanguageContext);
+    const { email, signIn, password, remember } = words[language];
     return (
         <ThemeProvider theme={theme}>
             <main css={styles.main}>
@@ -48,24 +73,24 @@ const Form = () => {
                     <Avatar css={styles.avatar}>
                         <LockOutlinedIcon />
                     </Avatar>
-                    <Typography variant='h5'>Sign In</Typography>
-                    <Select value='english'>
+                    <Typography variant='h5'>{signIn}</Typography>
+                    <Select value={language} onChange={changeLanguage}>
                         <MenuItem value='english'>English</MenuItem>
                         <MenuItem value='french'>French</MenuItem>
                         <MenuItem value='spanish'>Spanish</MenuItem>
                     </Select>
                     <form css={styles.form}>
                         <FormControl margin='normal' required fullWidth>
-                            <InputLabel htmlFor='email'>Email</InputLabel>
+                            <InputLabel htmlFor='email'>{email}</InputLabel>
                             <Input id='email' name='email' autoFocus />
                         </FormControl>
                         <FormControl margin='normal' required fullWidth>
-                            <InputLabel htmlFor='password'>Password</InputLabel>
+                            <InputLabel htmlFor='password'>{password}</InputLabel>
                             <Input id='password' name='password' autoFocus />
                         </FormControl>
                         <FormControlLabel
                             control={<Checkbox color='primary' />}
-                            label='Remember Me'
+                            label={remember}
                         />
                         <Button
                             variant='contained'
@@ -74,7 +99,7 @@ const Form = () => {
                             color='primary'
                             css={styles.submit}
                         >
-                            Sign In
+                            {signIn}
                         </Button>
                     </form>
                 </Paper>
