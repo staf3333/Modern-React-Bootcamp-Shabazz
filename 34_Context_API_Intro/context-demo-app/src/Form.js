@@ -1,43 +1,10 @@
+/** @jsxImportSource @emotion/react */
 import {
     Avatar, Button, CssBaseline, FormControl, FormControlLabel,
     Checkbox, Input, InputLabel, Paper, Typography, MenuItem, Select
 } from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { css } from '@emotion/react';
-
-// const styles = theme => ({
-//     main: {
-//       width: "auto",
-//       display: "block",
-//       marginLeft: theme.spacing.unit * 3,
-//       marginRight: theme.spacing.unit * 3,
-//       [theme.breakpoints.up("sm")]: {
-//         width: 400,
-//         marginLeft: "auto",
-//         marginRight: "auto"
-//       }
-//     },
-//     paper: {
-//       marginTop: theme.spacing.unit * 8,
-//       display: "flex",
-//       flexDirection: "column",
-//       alignItems: "center",
-//       padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
-//         .spacing.unit * 3}px`
-//     },
-//     avatar: {
-//       margin: theme.spacing.unit,
-//       backgroundColor: theme.palette.secondary.main
-//     },
-//     form: {
-//       width: "100%",
-//       marginTop: theme.spacing.unit * 3
-//     },
-//     submit: {
-//       marginTop: theme.spacing.unit * 3
-//     }
-//   });
 
 const styles = {
     main: theme => ({
@@ -48,8 +15,12 @@ const styles = {
         [theme.breakpoints.up("sm")]: {
             width: 400,
             marginLeft: "auto",
-            marginRight: "auto"
+            marginRight: "auto",
         }
+    }),
+    avatar: theme => ({
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main
     }),
     paper: theme => ({
         marginTop: theme.spacing(8),
@@ -69,7 +40,6 @@ const styles = {
 }
 
 const theme = createTheme();
-
 const Form = () => {
     return (
         <ThemeProvider theme={theme}>

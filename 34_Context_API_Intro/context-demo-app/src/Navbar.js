@@ -6,70 +6,9 @@ import IconButton from '@mui/material/IconButton';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Switch from '@mui/material/Switch';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { alpha, createTheme, ThemeProvider } from '@mui/material/styles';
 import { css } from '@emotion/react';
 
-// import { fade } from "@material-ui/core/styles/colorManipulator";
-
-// const styles = {
-//     root: css({
-//         width: "100%",
-//         marginBottom: 0
-//     }),
-//     grow: css({
-//         flexGrow: 1
-//     }),
-//     menuButton: css({
-//         marginLeft: -12,
-//         marginRight: 20
-//     }),
-//     title: {
-//         display: "none",
-//         [theme.breakpoints.up("sm")]: {
-//             display: "block"
-//         }
-//     },
-//     search: {
-//         position: "relative",
-//         borderRadius: theme.shape.borderRadius,
-//         backgroundColor: fade(theme.palette.common.white, 0.15),
-//         "&:hover": {
-//             backgroundColor: fade(theme.palette.common.white, 0.25)
-//         },
-//         marginLeft: 0,
-//         width: "100%",
-//         [theme.breakpoints.up("sm")]: {
-//             marginLeft: theme.spacing.unit,
-//             width: "auto"
-//         }
-//     },
-//     searchIcon: {
-//         width: theme.spacing.unit * 9,
-//         height: "100%",
-//         position: "absolute",
-//         display: "flex",
-//         alignItems: "center",
-//         justifyContent: "center"
-//     },
-//     inputRoot: {
-//         color: "inherit",
-//         width: "100%"
-//     },
-//     inputInput: {
-//         paddingTop: theme.spacing.unit,
-//         paddingRight: theme.spacing.unit,
-//         paddingBottom: theme.spacing.unit,
-//         paddingLeft: theme.spacing.unit * 10,
-//         transition: theme.transitions.create("width"),
-//         width: "100%",
-//         [theme.breakpoints.up("sm")]: {
-//             width: 120,
-//             "&:focus": {
-//                 width: 200
-//             }
-//         }
-//     }
-// });
 const styles = {
     root: css({
         width: "100%",
@@ -91,9 +30,9 @@ const styles = {
     search: theme => ({
         position: "relative",
         borderRadius: theme.shape.borderRadius,
-        backgroundColor: theme.palette.common.white,
+        backgroundColor: alpha(theme.palette.common.white, 0.15),
         "&:hover": {
-            backgroundColor: theme.palette.common.white
+            backgroundColor: alpha(theme.palette.common.white, 0.25)
         },
         marginLeft: 0,
         width: "100%",
@@ -109,87 +48,35 @@ const styles = {
         display: "flex",
         alignItems: "center",
         justifyContent: "center"
-    }),
-    inputRoot: css({
-        color: "inherit",
-        width: "100%"
-    }),
-    inputInput: theme => ({
-        paddingTop: theme.spacing(1),
-        paddingRight: theme.spacing(1),
-        paddingBottom: theme.spacing(1),
-        paddingLeft: theme.spacing(10),
-        transition: theme.transitions.create("width"),
-        width: "100%",
-        [theme.breakpoints.up("sm")]: {
-            width: 120,
-            "&:focus": {
-                width: 200
-            }
-        }
     })
 }
-// const styles = theme => ({
-//     root: {
-//         width: "100%",
-//         marginBottom: 0
-//     },
-//     grow: {
-//         flexGrow: 1
-//     },
-//     menuButton: {
-//         marginLeft: -12,
-//         marginRight: 20
-//     },
-//     title: {
-//         display: "none",
-//         [theme.breakpoints.up("sm")]: {
-//             display: "block"
-//         }
-//     },
-//     search: {
-//         position: "relative",
-//         borderRadius: theme.shape.borderRadius,
-//         backgroundColor: theme.palette.common.white,
-//         "&:hover": {
-//             backgroundColor: theme.palette.common.white
-//         },
-//         marginLeft: 0,
-//         width: "100%",
-//         [theme.breakpoints.up("sm")]: {
-//             marginLeft: theme.spacing(1),
-//             width: "auto"
-//         }
-//     },
-//     searchIcon: {
-//         width: theme.spacing(9),
-//         height: "100%",
-//         position: "absolute",
-//         display: "flex",
-//         alignItems: "center",
-//         justifyContent: "center"
-//     },
-//     inputRoot: {
-//         color: "inherit",
-//         width: "100%"
-//     },
-//     inputInput: {
-//         paddingTop: theme.spacing(1),
-//         paddingRight: theme.spacing(1),
-//         paddingBottom: theme.spacing(1),
-//         paddingLeft: theme.spacing(10),
-//         transition: theme.transitions.create("width"),
-//         width: "100%",
-//         [theme.breakpoints.up("sm")]: {
-//             width: 120,
-//             "&:focus": {
-//                 width: 200
-//             }
-//         }
-//     }
-// })
 
 const theme = createTheme();
+const inputTheme = createTheme({
+    components: {
+        MuiInputBase: {
+            styleOverrides: {
+                root: {
+                    color: "inherit",
+                    width: "100%"
+                },
+                input: {
+                    paddingTop: "8px",
+                    paddingRight: "8px",
+                    paddingBottom: "8px",
+                    paddingLeft: "80px",
+                    width: "100%",
+                    '@media (min-width: 600px)': {
+                        width: 120,
+                        "&:focus": {
+                            width: 200
+                        }
+                    }
+                }
+            },
+        },
+    },
+});
 const Navbar = () => {
     return (
         <ThemeProvider theme={theme}>
@@ -205,16 +92,14 @@ const Navbar = () => {
                         <Switch />
                         <div css={styles.grow} />
                         <div css={styles.search}>
-                            <div className={styles.searchIcon}>
+                            <div css={styles.searchIcon}>
                                 <SearchIcon />
                             </div>
-                            <InputBase
-                                placeholder='Search...'
-                                css={{
-                                    root: styles.inputRoot,
-                                    input: styles.inputInput
-                                }}
-                            />
+                            <ThemeProvider theme={inputTheme}>
+                                <InputBase
+                                    placeholder='Search...'
+                                />
+                            </ThemeProvider>
                         </div>
                     </Toolbar>
                 </AppBar>
