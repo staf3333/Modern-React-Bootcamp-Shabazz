@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, memo } from 'react';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
@@ -10,9 +10,15 @@ import EditTodoForm from './EditTodoForm';
 import useToggleState from './hooks/useToggleState';
 import { TodosContext } from './contexts/todos.context';
 
+function todoPropsAreEqual(prevTodo, nextTodo) {
+    return prevTodo.task === nextTodo.task
+        && prevTodo.completed === nextTodo.completed;
+}
+
 function Todo({ task, completed, id }) {
     const { removeTodo, toggleTodo } = useContext(TodosContext)
     const [isEditing, toggle] = useToggleState(false);
+    console.log("TODO RE-RENDER:", task);
     return (
         <ListItem style={{ height: "64px" }}>
             {isEditing ? (<EditTodoForm id={id} task={task} toggleEdit={toggle} />) : (
@@ -34,4 +40,4 @@ function Todo({ task, completed, id }) {
         </ListItem>
     );
 }
-export default Todo;
+export default memo(Todo, todoPropsAreEqual);

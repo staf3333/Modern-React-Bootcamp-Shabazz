@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, Fragment } from 'react';
 import Paper from '@mui/material/Paper';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -12,13 +12,13 @@ function TodoList() {
             <Paper>
                 <List>
                     {todos.map((todo, i) => (
-                        <>
+                        <Fragment key={i}>
                             <Todo
                                 {...todo}
                                 key={todo.id}
                             />
                             {i < todos.length - 1 && <Divider />}
-                        </>
+                        </Fragment>
                     ))}
                 </List>
             </Paper>
