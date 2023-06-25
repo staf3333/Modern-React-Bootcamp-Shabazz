@@ -10,15 +10,14 @@ import EditTodoForm from './EditTodoForm';
 import useToggleState from './hooks/useToggleState';
 import { DispatchContext } from './contexts/todos.context';
 
-function todoPropsAreEqual(prevTodo, nextTodo) {
-    return prevTodo.task === nextTodo.task
-        && prevTodo.completed === nextTodo.completed;
-}
+// function todoPropsAreEqual(prevTodo, nextTodo) {
+//     return prevTodo.task === nextTodo.task
+//         && prevTodo.completed === nextTodo.completed;
+// }
 
 function Todo({ task, completed, id }) {
     const dispatch = useContext(DispatchContext)
     const [isEditing, toggle] = useToggleState(false);
-    console.log("TODO RE-RENDER:", task);
     return (
         <ListItem style={{ height: "64px" }}>
             {isEditing ? (<EditTodoForm id={id} task={task} toggleEdit={toggle} />) : (
@@ -40,4 +39,4 @@ function Todo({ task, completed, id }) {
         </ListItem>
     );
 }
-export default memo(Todo, todoPropsAreEqual);
+export default memo(Todo);
