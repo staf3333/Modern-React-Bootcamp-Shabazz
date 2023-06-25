@@ -8,12 +8,6 @@ import TodoList from './TodoList';
 import { TodosProvider } from './contexts/todos.context';
 
 const TodoApp = () => {
-    const initialTodos = [
-        { id: 1, task: "Clean Fishtank", completed: false },
-        { id: 2, task: "Wash Car", completed: true },
-        { id: 3, task: "Grow Beard", completed: false }
-    ];
-
     return (
         <div>
             <Paper

@@ -8,7 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import EditTodoForm from './EditTodoForm';
 import useToggleState from './hooks/useToggleState';
-import { TodosContext } from './contexts/todos.context';
+import { DispatchContext } from './contexts/todos.context';
 
 function todoPropsAreEqual(prevTodo, nextTodo) {
     return prevTodo.task === nextTodo.task
@@ -16,19 +16,19 @@ function todoPropsAreEqual(prevTodo, nextTodo) {
 }
 
 function Todo({ task, completed, id }) {
-    const { removeTodo, toggleTodo } = useContext(TodosContext)
+    const dispatch = useContext(DispatchContext)
     const [isEditing, toggle] = useToggleState(false);
     console.log("TODO RE-RENDER:", task);
     return (
         <ListItem style={{ height: "64px" }}>
             {isEditing ? (<EditTodoForm id={id} task={task} toggleEdit={toggle} />) : (
                 <>
-                    <Checkbox tabIndex={-1} checked={completed} onClick={() => toggleTodo(id)} />
+                    <Checkbox tabIndex={-1} checked={completed} onClick={() => dispatch({ type: "TOGGLE", id: id })} />
                     <ListItemText style={{ textDecoration: completed ? "line-through" : "none" }}>
                         {task}
                     </ListItemText>
                     <ListItemSecondaryAction>
-                        <IconButton aria-label="delete" onClick={() => removeTodo(id)}>
+                        <IconButton aria-label="delete" onClick={() => dispatch({ type: "REMOVE", id: id })}>
                             <DeleteIcon />
                         </IconButton>
                         <IconButton aria-label="edit" onClick={toggle}>
