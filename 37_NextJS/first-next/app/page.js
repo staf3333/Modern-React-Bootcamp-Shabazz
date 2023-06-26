@@ -13,7 +13,7 @@ const Page = async () => {
             <ul>
                 {posts.map(post => (
                     <li key={post.id}>
-                        <Link href="/post">
+                        <Link href={`/post?id=${post.id}`}>
                             {post.title}
                         </Link>
                     </li>
