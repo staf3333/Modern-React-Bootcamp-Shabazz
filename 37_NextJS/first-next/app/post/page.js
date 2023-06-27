@@ -10,15 +10,25 @@ const getDataById = async id => {
     return data;
 }
 
+const Comment = ({ email, body }) => (
+    <div>
+        <h5>{email}</h5>
+        <p>{body}</p>
+    </div>
+)
+
 const Post = async () => {
     const postParams = useSearchParams();
     const id = postParams.get('id');
     const comments = await getDataById(id);
     console.log(comments);
     return (
-        <>
-            <h1>YOU ARE LOOKING AT POST #{id}</h1>
-        </>
+        <div>
+            <h1>Comments for Post #{id}</h1>
+            {comments.map(comment => (
+                <Comment {...comment} key={comment.id} />
+            ))}
+        </div>
     )
 }
 
