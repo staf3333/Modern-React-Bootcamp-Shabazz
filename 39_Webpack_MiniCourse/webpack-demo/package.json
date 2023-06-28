@@ -27,6 +27,7 @@
     "webpack-merge": "^5.9.0"
   },
   "dependencies": {
+    "css-minimizer-webpack-plugin": "^5.0.1",
     "html-loader": "^4.2.0"
   }
 }
