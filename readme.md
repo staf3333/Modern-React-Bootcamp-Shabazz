@@ -1045,6 +1045,8 @@ Downside of using a library like `rc-slider` is that if you want custom styles, 
 
 Wasn't too complicated, added a Navbar component with some divs for styling and a button for main page.
 
+## TO DO: ADD NOTES FOR CONTEXT API
+
 Day 2 of being down bad from covid... I will return!
 
 Day 3 of being super down bad, at er
