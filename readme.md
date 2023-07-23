@@ -6,13 +6,13 @@ To complete the loop I'll be taking [another Colt Steele Course](https://www.ude
 
 Here are some highlights (taken from the course description):
 
-* Learn React, from the very basics up to advanced topics like Next JS, React Router, Higher Order Components and Hooks and the Context API.
+- Learn React, from the very basics up to advanced topics like Next JS, React Router, Higher Order Components and Hooks and the Context API.
 
-* Build one massive capstone application, complete with drag & drop, animations, route transitions, complex form validations, and more.
+- Build one massive capstone application, complete with drag & drop, animations, route transitions, complex form validations, and more.
 
-* Learn the latest in React, including Hooks (my favorite part of React!).  We build a complete app using Hooks, including multiple custom hooks.
+- Learn the latest in React, including Hooks (my favorite part of React!). We build a complete app using Hooks, including multiple custom hooks.
 
-* Learn state management using the useContext and useReducer hooks, to mimic some of the functionality of Redux.
+- Learn state management using the useContext and useReducer hooks, to mimic some of the functionality of Redux.
 
 ## Intro
 
@@ -26,7 +26,7 @@ I think this will greatly help my memory retention, as well as serve as a refere
 
 ### Intro to React
 
-I start off by learning... what is React? It is a powerful **front-end framework/library** that makes it easy to use and reuse "view components" and makes it easier to build modular applications! In react, we "encapsulate" logic and HTML into a *class* that can be shared across documents.
+I start off by learning... what is React? It is a powerful **front-end framework/library** that makes it easy to use and reuse "view components" and makes it easier to build modular applications! In react, we "encapsulate" logic and HTML into a _class_ that can be shared across documents.
 
 ### Framework or Library?
 
@@ -34,15 +34,15 @@ Apparently there are some discussion around if React is a framework or a library
 
 Key characteristics:
 
-* Larger JS Libraries
-* Provide "blueprint" for apps
-* "Opinionated", meaning they have guidelines for how you should design an app
-* they often provide for code re-use
-* They also often provide templating for HTML
+- Larger JS Libraries
+- Provide "blueprint" for apps
+- "Opinionated", meaning they have guidelines for how you should design an app
+- they often provide for code re-use
+- They also often provide templating for HTML
 
 What are some popular frameworks rn? Angular, Ember, Vue, **React**, **Next.js**
 
-Now, let's get back to the question of "is React a framework or library?" Colt's opinion is that React *by itself* is a library, however people rarely use it on it's own. React is usually combined with things like React Router, Webpack, etc. making the "React Ecosystem" a framework in it's own right. Side note: Next.js is actually a framework built around React!
+Now, let's get back to the question of "is React a framework or library?" Colt's opinion is that React _by itself_ is a library, however people rarely use it on it's own. React is usually combined with things like React Router, Webpack, etc. making the "React Ecosystem" a framework in it's own right. Side note: Next.js is actually a framework built around React!
 
 ### Components
 
@@ -52,9 +52,9 @@ Now, let's get back to the question of "is React a framework or library?" Colt's
 
 Key characteristics:
 
-* Contain pieces of UI & view (JS) logic
+- Contain pieces of UI & view (JS) logic
 
-* Classes that know how to render themselves into HTML (however not all components are class based, there are function based components as well which we will get into later in the course)
+- Classes that know how to render themselves into HTML (however not all components are class based, there are function based components as well which we will get into later in the course)
 
 At the end of this video, we went over an [example](https://codesandbox.io/s/62x458v5pn) of a Rating component that consisted of multiple Star components.
 
@@ -64,31 +64,31 @@ We can write components using both Classes and Functions
 
 Notes to preface:
 
-* You need to include a `<script>` tag to enable React
+- You need to include a `<script>` tag to enable React
 
-    ```` HTML
-    <script src="https://unpkg.com/react/umd/react.development.js"></script>
-    ````
+  ```HTML
+  <script src="https://unpkg.com/react/umd/react.development.js"></script>
+  ```
 
-* Also need another script tag to include [**React DOM**](https://www.geeksforgeeks.org/reactjs-reactdom/#)
+- Also need another script tag to include [**React DOM**](https://www.geeksforgeeks.org/reactjs-reactdom/#)
 
-    ```` HTML
-    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
-    ````
+  ```HTML
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  ```
 
-* Need a script tag for [**Babel**](https://babeljs.io/docs/), a JavaScript compiler that allows you to use **JSX** to write HTML tags directly in JS
+- Need a script tag for [**Babel**](https://babeljs.io/docs/), a JavaScript compiler that allows you to use **JSX** to write HTML tags directly in JS
 
-    ```` HTML
-    <script src="https://unpkg.com/babel-standalone"></script>
-    ````
+  ```HTML
+  <script src="https://unpkg.com/babel-standalone"></script>
+  ```
 
-* Need a script tag to the actual file where you type you component!
+- Need a script tag to the actual file where you type you component!
 
-    ```` HTML
-    <script src="index.js" type="text/jsx"></script>
-    ````
+  ```HTML
+  <script src="index.js" type="text/jsx"></script>
+  ```
 
-  * `type = "text/jsx"` is important because it tells the browser that the file might contain JSX syntax
+  - `type = "text/jsx"` is important because it tells the browser that the file might contain JSX syntax
 
 #### Function Vs. Class Based Components
 
@@ -98,13 +98,13 @@ Class components are the "traditional" form of React Components. They allow you 
 
 Example:
 
-````javascript
+```javascript
 class Dog extends React.Component {
-    render() {
-        return <p>Hi everyone!</p>
-    }
+  render() {
+    return <p>Hi everyone!</p>;
+  }
 }
-````
+```
 
 ##### Function Components
 
@@ -112,11 +112,11 @@ Function components are historically used for simpler, "dumb," components that d
 
 Example:
 
-````javascript
+```javascript
 function Dog() {
-    return <p>Hi everyone!</p>
+  return <p>Hi everyone!</p>;
 }
-````
+```
 
 ##### What's the Difference?
 
@@ -126,7 +126,7 @@ For this course, we'll begin working with class components for the most part (so
 
 #### Standard React App Layout
 
-Instead of having our *component* in the index.js file... we'll often have more than one component so we'll want to keep them in separate files!
+Instead of having our _component_ in the index.js file... we'll often have more than one component so we'll want to keep them in separate files!
 
 > Convention: 1 Component per file, w/ component name as file name
 
@@ -140,9 +140,9 @@ In this section, I solidified the concept of using state in react by creating tw
 
 Objective:
 
->For this part, create a coin flipping counter.
-The user should be able to click on a button to flip a coin. Every time the user clicks, the coin gets flipped again. The app should also keep track of how many times heads and tails have shown up.
-Before building anything, think about the structure of your React app. Don’t build this application with a single component: think about how to break your app up into at least two separate components!
+> For this part, create a coin flipping counter.
+> The user should be able to click on a button to flip a coin. Every time the user clicks, the coin gets flipped again. The app should also keep track of how many times heads and tails have shown up.
+> Before building anything, think about the structure of your React app. Don’t build this application with a single component: think about how to break your app up into at least two separate components!
 
 I should expect my final output to look something like this:
 ![Coin Flipper Demo](/extras/images/coin.gif)
@@ -160,13 +160,13 @@ Once I figured out the structuring of everything, making the components themselv
 
 ### Goals of this section
 
-* Learn how to attach event handlers to components in React
+- Learn how to attach event handlers to components in React
 
-* Learn how to use method binding to preserve the ***this*** context within event handlers
+- Learn how to use method binding to preserve the **_this_** context within event handlers
 
-* Learn how to pass event handlers down as props to child components
+- Learn how to pass event handlers down as props to child components
 
-* Understand the **key** prop that React asks for when mapping data
+- Understand the **key** prop that React asks for when mapping data
 
 ### Commonly used React Events
 
@@ -180,85 +180,86 @@ In order to practice/refresh this we created three different components:
 
 2. AnnoyingForm: practiced **onKeyUp** by creating a component that sent alerts if you type in the text box. Also, we used the event data itself to give different alerts depending on which key was pressed...
 
-    ```javascript
-    handleKeyUp(e) {
-        if (e.keyCode === 56) {
-            alert('************** I LOVE THE * CHARACTER ************')
-        } else {
-            alert('BOO!')
-        }
-    }
-    ```
+   ```javascript
+   handleKeyUp(e) {
+       if (e.keyCode === 56) {
+           alert('************** I LOVE THE * CHARACTER ************')
+       } else {
+           alert('BOO!')
+       }
+   }
+   ```
 
 3. CopyDemo: practiced **onCopy** event by creating a component that alerts when you tried to copy the text.
-    * interesting thing to note was that the copy event wasn't the act of clicking CTRL + C, it was simply highlighting the text
+   - interesting thing to note was that the copy event wasn't the act of clicking CTRL + C, it was simply highlighting the text
 
 ### The Joys of Method Binding
 
-#### keyword ***this***
+#### keyword **_this_**
 
-You always have to be careful when you reference the keyword ***this*** in event handlers!
+You always have to be careful when you reference the keyword **_this_** in event handlers!
 
-Why? Because you lose the ***this*** context when you pass a function as an event handler. To demonstrate this, we moved the quotes from the WiseSquare component we made into defaultProps and didn't change the way the function was defined. When we ran, we got an error because ***this*** was undefined in that context
+Why? Because you lose the **_this_** context when you pass a function as an event handler. To demonstrate this, we moved the quotes from the WiseSquare component we made into defaultProps and didn't change the way the function was defined. When we ran, we got an error because **_this_** was undefined in that context
 
 #### fixing our binding
 
-There are three ways to fix the issue that we were getting (***this*** not being defined in that context):
+There are three ways to fix the issue that we were getting (**_this_** not being defined in that context):
 
 1. Use **bind** inline:
 
-    ```javascript
-    <div className = "WiseSquare"
-         onMouseEnter={this.dispenseWisdom.bind(this)}>
-         //logic
-    </div>
-    ```
+   ```javascript
+   <div className="WiseSquare" onMouseEnter={this.dispenseWisdom.bind(this)}>
+     //logic
+   </div>
+   ```
 
-    * Pros
-        * Very explicit
-    * Cons
-        * What if we needed to pass to multiple components? We would have to bind every time!
-        * By doing it this way, we are creating a new function on every render!
-            * this could affect performance!
+   - Pros
+     - Very explicit
+   - Cons
+     - What if we needed to pass to multiple components? We would have to bind every time!
+     - By doing it this way, we are creating a new function on every render!
+       - this could affect performance!
+
 2. Use **arrow** function:
 
-    ```javascript
-    <div className = "WiseSquare"
-         onMouseEnter={() => this.dispenseWisdom()}>
-         //logic
-    </div>
-    ```
+   ```javascript
+   <div className="WiseSquare" onMouseEnter={() => this.dispenseWisdom()}>
+     //logic
+   </div>
+   ```
 
-    * Pros
-        * No mention of bind!
-    * Cons
-        * Intent is less clear (can't really tell that we're binding)
-        * Again, we are creating a new function on every render!
+   - Pros
+     - No mention of bind!
+   - Cons
+     - Intent is less clear (can't really tell that we're binding)
+     - Again, we are creating a new function on every render!
+
 3. Method bind in the constructor:
 
-    ```javascript
-    class WiseSquare extends Component {
-        constructor(props) {
-            super(props);
-            this.dispenseWisdom = this.dispenseWisdom.bind(this)
-        }
-    }
-    ```
+   ```javascript
+   class WiseSquare extends Component {
+     constructor(props) {
+       super(props);
+       this.dispenseWisdom = this.dispenseWisdom.bind(this);
+     }
+   }
+   ```
 
-    * Pros
-        * Only have to bind once!
-        * Better for performance
-    * Cons
-        * Uglier to write (you'll be fine)
+   - Pros
+     - Only have to bind once!
+     - Better for performance
+   - Cons
+     - Uglier to write (you'll be fine)
 
 ### Alternative Binding With Class Properties
 
-There is another way to bind keyword ***this***, but it is [experimental](https://tc39.es/process-document/) meaning that it isn't quite fully integrated into JS/React. However, since we are using Babel & CRA, we can use it and let CRA convert it! (Wouldn't work if you didn't use CRA/Babel)
+There is another way to bind keyword **_this_**, but it is [experimental](https://tc39.es/process-document/) meaning that it isn't quite fully integrated into JS/React. However, since we are using Babel & CRA, we can use it and let CRA convert it! (Wouldn't work if you didn't use CRA/Babel)
 
 ```javascript
-handleClick = () => {    //equals sign and arrow fcn ensures 'this is bound within handleClick
-    console.log('this is', this);
-}
+handleClick = () => {
+  //equals sign and arrow fcn ensures 'this is bound within handleClick
+  console.log("this is", this);
+};
 ```
 
 ### Binding With Arguments
@@ -277,7 +278,7 @@ changeColor(newColor) {
 }
 ```
 
-However if you just try to call `this.changeColor(c)` in `onClick` event, you'll run into errors b/c it will immediately be invoked (`this.changeColor` vs `this.changeColor()`). In order to fix this (no pun intended), we need to bind the value of ***this***!
+However if you just try to call `this.changeColor(c)` in `onClick` event, you'll run into errors b/c it will immediately be invoked (`this.changeColor` vs `this.changeColor()`). In order to fix this (no pun intended), we need to bind the value of **_this_**!
 
 First way to do it would be ===> `onClick = {this.changeColor.bind(this, c)}`. But, as we've learned, this is not the best way to do it!
 
@@ -307,15 +308,13 @@ class NumberList extends Component {
   }
 
   remove(num) {
-    this.setState(st => ({
-      nums: st.nums.filter(n => n !== num)
+    this.setState((st) => ({
+      nums: st.nums.filter((n) => n !== num),
     }));
   }
 
   render() {
-    let nums = this.state.nums.map(n => (
-      <NumberItem value={n} />
-    ));
+    let nums = this.state.nums.map((n) => <NumberItem value={n} />);
     return (
       <div>
         <h1>First Number List</h1>
@@ -330,28 +329,31 @@ There are two ways to pass remove function down
 
 1. pass `remove` function in as a prop:
 
-    ```javascript
-    let nums = this.state.map(n => <NumberItem value={n} remove={() => this.remove(n)} />)
-    ```
+   ```javascript
+   let nums = this.state.map((n) => (
+     <NumberItem value={n} remove={() => this.remove(n)} />
+   ));
+   ```
 
-    * note that we're using the arrow function notation = making a bunch of new functions by setting inline in render
+   - note that we're using the arrow function notation = making a bunch of new functions by setting inline in render
+
 2. Do it without binding inside of render --> bind once in the constructor:
 
-    In constructor we'll have:
+   In constructor we'll have:
 
-    ```javascript
-    constructor(props) {
-        super(props);
-        this.state = { nums: [1, 2, 3, 4, 5] };
-        this.remove = this.remove.bind(this)
-    }
-    ```
+   ```javascript
+   constructor(props) {
+       super(props);
+       this.state = { nums: [1, 2, 3, 4, 5] };
+       this.remove = this.remove.bind(this)
+   }
+   ```
 
-    Then in render we'll have:
+   Then in render we'll have:
 
-    ```javascript
-    let nums = this.state.nums.map(n => <NumberItem value={n} remove={this.remove}>)
-    ```
+   ```javascript
+   let nums = this.state.nums.map(n => <NumberItem value={n} remove={this.remove}>)
+   ```
 
 Problem with option 2 as is is that we're not passing in the argument so that when we go to call method on child component... `<button onClick={this.props.remove}>X</button`, we'll get weird behavior because the default behavior is to pass in the event object itself!
 
@@ -383,14 +385,13 @@ constructor(props) {
 Final result:
 
 ```javascript
-
 class BetterNumberItem extends Component {
   constructor(props) {
     super(props);
-    this.handleRemove = this.handleRemove.bind(this)
+    this.handleRemove = this.handleRemove.bind(this);
   }
   handleRemove(evt) {
-    this.props.remove(this.props.value)
+    this.props.remove(this.props.value);
   }
   render() {
     return (
@@ -407,11 +408,11 @@ class BetterNumberItem extends Component {
 
 Here are Colt's guidelines on where to bind methods:
 
-* The higher, the better - don't bind in child component if not needed
-* If you need a parameter, pass it down to the child as a property, then bind in parent and child component
-* Avoid inline arrow functions/binding if possible
-* No need to bind constructor and make an inline function (redundant)
-* If stuck, don't worry about performance, just try to get components talking to each other --> refactor later
+- The higher, the better - don't bind in child component if not needed
+- If you need a parameter, pass it down to the child as a property, then bind in parent and child component
+- Avoid inline arrow functions/binding if possible
+- No need to bind constructor and make an inline function (redundant)
+- If stuck, don't worry about performance, just try to get components talking to each other --> refactor later
 
 ### Parent-Child Method Naming
 
@@ -421,7 +422,7 @@ You can call event handlers whatever you want... React could care less. However,
 
 Up until now, anytime we've been mapping over data and returning a list of components, we get a message warning about keys for list items: ![Key Error](/extras/images/keyError.png)
 
-***key*** is a special string attribute to include when creating lists of events. Keys help React identify which items have been changed, are added, or are removed
+**_key_** is a special string attribute to include when creating lists of events. Keys help React identify which items have been changed, are added, or are removed
 
 #### Adding keys
 
@@ -429,13 +430,13 @@ To assign a key, add it as a property to whatever component you're mapping out:
 
 ```javascript
 ///whatever comes before this
-nums.map(n => (
-    <NumberItem 
-        value={n}
-        key={n} //in this example we set key to be num itself
-        remove={this.remove}    
-    />
-))
+nums.map((n) => (
+  <NumberItem
+    value={n}
+    key={n} //in this example we set key to be num itself
+    remove={this.remove}
+  />
+));
 ```
 
 Note: the way we set key to be num itself only work is **if the data (numbers in this case) is unique**
@@ -446,13 +447,13 @@ We want to ALWAYS have unique keys!
 
 #### Picking keys
 
-* The best way to pick keys is to use a string that uniquely identifies item among siblings!
-* Most often you would use IDs from your data as keys
-* As a **last resort**, you may use the iteration index as a key (if you don't have stable IDs)
-  * Not a very good idea!
-  * Don't use indexes for keys if item order may change or items can be deleted!
-    * Can cause performance issues or bugs with component state
-* There does exist libraries that help you make unique keys
+- The best way to pick keys is to use a string that uniquely identifies item among siblings!
+- Most often you would use IDs from your data as keys
+- As a **last resort**, you may use the iteration index as a key (if you don't have stable IDs)
+  - Not a very good idea!
+  - Don't use indexes for keys if item order may change or items can be deleted!
+    - Can cause performance issues or bugs with component state
+- There does exist libraries that help you make unique keys
 
 ## Section 11: Hangman Exercise
 
@@ -465,8 +466,8 @@ For the Hangman exercise, we were given a fair amount of starter code and we had
 1. Add a key to the buttons
 2. Keep track of the number of wrong guesses
 3. End game on a loss
-    * In starter code, game allowed you to keep pressing buttons even after the game is over
-    * Want to change it so it no longer shows buttons & and shows message "you win" and reveal the correct word
+   - In starter code, game allowed you to keep pressing buttons even after the game is over
+   - Want to change it so it no longer shows buttons & and shows message "you win" and reveal the correct word
 4. Add alt text to hangman image for accessibility
 5. Use a random word to be the answer
 6. Add a restart Button
@@ -486,10 +487,10 @@ This part was pretty simple, since there are no duplicates in the alphabet (whic
 
 ### Tracking incorrect guesses
 
-Simple, just added a p tag in the render that displayed the `nWrong` from the state  
+Simple, just added a p tag in the render that displayed the `nWrong` from the state
 
 ```javascript
-<p className='Hangman-btns'>{this.generateButtons()}</p>
+<p className="Hangman-btns">{this.generateButtons()}</p>
 ```
 
 ### Ending game on a loss
@@ -498,16 +499,20 @@ Used conditionals outside of return (for Hangman render method) because there we
 
 ```javascript
 let content;
-  if (this.state.nWrong === this.props.maxWrong) {
-    content = <div>
+if (this.state.nWrong === this.props.maxWrong) {
+  content = (
+    <div>
       <p>You Lose! You are absolutely atrocious at this game!</p>
       <p>Here is the correct answer, bum: {this.state.answer}</p>
     </div>
-  } else {
-    content = <div>
-      <p className='Hangman-btns'>{this.generateButtons()}</p>
+  );
+} else {
+  content = (
+    <div>
+      <p className="Hangman-btns">{this.generateButtons()}</p>
     </div>
-  }
+  );
+}
 ```
 
 > here, we create a content variable, that we can easily pass into the return and it will adapt based on the conditionals
@@ -552,14 +557,14 @@ Objective: Make a game on a grid of lights were toggling one light toggles it's 
 
 Instead of telling us how to structure the components right off the back, Colt asked us to take a second to think ab how we would structure the components...
 
-* App components- responsible for rendering the GameBoard component; could pass in props to like how large you want the game board to be, but it definitely should not have a state
-* GameBoard - renders board grid
-  * props?
-    * A  2D array? This is what I said at first but instead of create 2 seperate 2D arrays for both props and state, I can just use one 2D to keep track of is a light on or not and render Lights based of that
-  * state?
-    * What's changing - the state of each light, whether the game is won or not
-* Light - renders a single light div, where state of that light (from GameBoard components) is passed in as a prop to this child component.
-* Also need a way to toggle lights on and off --> function passed down to Light from GameBoard
+- App components- responsible for rendering the GameBoard component; could pass in props to like how large you want the game board to be, but it definitely should not have a state
+- GameBoard - renders board grid
+  - props?
+    - A 2D array? This is what I said at first but instead of create 2 seperate 2D arrays for both props and state, I can just use one 2D to keep track of is a light on or not and render Lights based of that
+  - state?
+    - What's changing - the state of each light, whether the game is won or not
+- Light - renders a single light div, where state of that light (from GameBoard components) is passed in as a prop to this child component.
+- Also need a way to toggle lights on and off --> function passed down to Light from GameBoard
 
 ^^^ The above is what I came up with on my own and I was pretty spot on! I ended up using different component names to match the starter code: App (same), GameBoard => Board, Light => Cell
 
@@ -574,7 +579,7 @@ My first inclination was to create an empty 2D array, and then fill it with the 
 Lets say for a 5x5 board:
 
 ```javascript
-board: new Array(5).fill().map(_ => new Array(5).fill(false))
+board: new Array(5).fill().map((_) => new Array(5).fill(false));
 ```
 
 > Which is apparently different than `Array(5).fill(new Array(5).fill(false))`. This one apparently adds a reference to the array that was passed into the fill method... meaning... all the rows are filled w/ references to ONE array. if you update `arr[0][0]` the value of `arr[1][0]` will be changed to! Arrow function is important!
@@ -623,18 +628,23 @@ Then I used .map to render the board:
 
 ```javascript
 return (
-      <table className="Board">
-        <tbody>
-          {this.state.board.map((row, y) => (
-            <tr key={y}>
-              {row.map((cell, x) => (
-                < Cell isLit={cell} key={`${y}-${x}`} flipCellsAroundMe={this.flipCellsAround} coord={`${y}-${x}`} />
-              ))}
-            </tr>
+  <table className="Board">
+    <tbody>
+      {this.state.board.map((row, y) => (
+        <tr key={y}>
+          {row.map((cell, x) => (
+            <Cell
+              isLit={cell}
+              key={`${y}-${x}`}
+              flipCellsAroundMe={this.flipCellsAround}
+              coord={`${y}-${x}`}
+            />
           ))}
-        </tbody>
-      </table>
-    )
+        </tr>
+      ))}
+    </tbody>
+  </table>
+);
 ```
 
 > in order to get iteration index of .map fcn, add second input to the arrow function: `.map((item, index) => xyz)`
@@ -652,7 +662,7 @@ In order to check if the user has won the game, we have to check the board after
 One way to do this is by using nested for loops, another way is by using the .every method on the board:
 
 ```javascript
-let hasWon = board.every(row => row.every(cell => !cell));
+let hasWon = board.every((row) => row.every((cell) => !cell));
 ```
 
 > The every() method executes a function for each array element. The every() method returns true if the function returns true for all elements. The every() method returns false if the function returns false for one element. The every() method does not execute the function for empty elements.
@@ -680,11 +690,11 @@ It is convenient to have a JS function that:
 1. Handles the submission of the form
 2. Has access to the data that the user entered
 
-The technique to achieve this is called using ***controlled components***
+The technique to achieve this is called using **_controlled components_**
 
 #### Controlled components
 
-HTML form elements maintain their own state and update it based on user input. However, in React, mutable state is kept in the *state* of the components (and are only updated with `setState()`).
+HTML form elements maintain their own state and update it based on user input. However, in React, mutable state is kept in the _state_ of the components (and are only updated with `setState()`).
 
 So, how do we reconcile these two i.e. how do we use React to control form input state? We want the data from our forms to always be in sync with our state data!
 
@@ -695,7 +705,7 @@ In order to have them in sync, we make React state to be the "single source of t
 1. What is shown (value of the component)
 2. What happens when the user types (kept in state)
 
-Input elements controlled in this way are called ***controlled components***
+Input elements controlled in this way are called **_controlled components_**
 
 #### How controlled form works
 
@@ -732,7 +742,7 @@ class NameForm extend Component {
 }
 ```
 
-Since `handleChange` runs on every keystroke to update the React state, the displayed value will update as the user types. With a ***controlled component***, every state mutation will have an associated handler function. This makes it easier to modify or validate user input
+Since `handleChange` runs on every keystroke to update the React state, the displayed value will update as the user types. With a **_controlled component_**, every state mutation will have an associated handler function. This makes it easier to modify or validate user input
 
 ### Writing Forms w/ Multiple Inputs
 
@@ -776,14 +786,14 @@ In this case, each input needs an onChange property but we can't just reuse the 
 
 #### ES2015 review
 
-ES2015 introduced a few object enhancements... including the ability to create objects w/ dynamic keys based on JS expressions --> these are called ***computed property names***
+ES2015 introduced a few object enhancements... including the ability to create objects w/ dynamic keys based on JS expressions --> these are called **_computed property names_**
 
 In ES5...
 
 ```javascript
 var catData = {};
 var microchip = 12345654;
-catData[microchip]= "Blue Steele";
+catData[microchip] = "Blue Steele";
 ```
 
 In ES2015...
@@ -791,8 +801,8 @@ In ES2015...
 ```javascript
 let microchips = 12345654;
 let catData = {
-  [microchip]: "Blue Steele"
-}
+  [microchip]: "Blue Steele",
+};
 ```
 
 ^ computes name of property based on the value of microchip
@@ -808,7 +818,7 @@ class MultipleForm extends Components {
   // all that other jazz
   handleChange(evt) {
     this.setState({
-      [evt.target.name]: evt.target.value
+      [evt.target.name]: evt.target.value,
     });
   }
   // render
@@ -831,35 +841,35 @@ To practice this, we made a simple dummy shopping list app:
 
 1. First, we created a basic for w/ two inputs (name & qty)
 2. Applied logic we just went over:
-    * apply name attribute and match it to state name
-    * use `htmlFor` to match label to input id
-    * create `handleChange` event handler, and use ES2015 literals to set state based on what input is being changed
+   - apply name attribute and match it to state name
+   - use `htmlFor` to match label to input id
+   - create `handleChange` event handler, and use ES2015 literals to set state based on what input is being changed
 3. Lastly, actually do something with the data1
-    * defined a method in parent component (ShoppingList) that will add item to list in state, and pass it down to form component
-    * call method w/ state from the form
+   - defined a method in parent component (ShoppingList) that will add item to list in state, and pass it down to form component
+   - call method w/ state from the form
 
 ### Using the UUID Library
 
-Seen how it's bad to use iteration index as a key property for our components, but what if we have no natural unique keys? We can **use library to create uuid**. ***Universally Unique Identifier (UUID)*** is a way to uniquely identify info
+Seen how it's bad to use iteration index as a key property for our components, but what if we have no natural unique keys? We can **use library to create uuid**. **_Universally Unique Identifier (UUID)_** is a way to uniquely identify info
 
 You can install it using `npm i uuid`
 
 ```javascript
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 class BoxList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            boxes: [
-                { height: 300, width: 300, backgroundColor: "pink", id: uuidv4() },
-                { height: 500, width: 400, backgroundColor: "orange", id: uuidv4() }
-            ]
-        }
-        this.createBox = this.createBox.bind(this);
-        this.removeBox = this.removeBox.bind(this);
-    }
-    //etc
+  constructor(props) {
+    super(props);
+    this.state = {
+      boxes: [
+        { height: 300, width: 300, backgroundColor: "pink", id: uuidv4() },
+        { height: 500, width: 400, backgroundColor: "orange", id: uuidv4() },
+      ],
+    };
+    this.createBox = this.createBox.bind(this);
+    this.removeBox = this.removeBox.bind(this);
+  }
+  //etc
 }
 ```
 
@@ -867,11 +877,11 @@ class BoxList extends Component {
 
 Objective of this exercise was to create a new React application, which contains the following components:
 
-* App - this component should render the BoxList component.
-* BoxList - Place your state that contains all of the boxes here. This component should render all of the Box components along with the NewBoxForm component
-* Box- this component should display a div with a background color, width and height based on the props passed to it.
-* NewBoxForm - this component should render a form that when submitted, creates a new Box. You should be able to specify the Box’s width, height, and background color. When the form is submitted, clear the input values.
-* When each Box component is displayed, add a button with the text of of “X” next to each Box. When this button is clicked, remove that specific box. This will require you to pass a function down as props - the button should not be a separate component, it should be included in the Box component.
+- App - this component should render the BoxList component.
+- BoxList - Place your state that contains all of the boxes here. This component should render all of the Box components along with the NewBoxForm component
+- Box- this component should display a div with a background color, width and height based on the props passed to it.
+- NewBoxForm - this component should render a form that when submitted, creates a new Box. You should be able to specify the Box’s width, height, and background color. When the form is submitted, clear the input values.
+- When each Box component is displayed, add a button with the text of of “X” next to each Box. When this button is clicked, remove that specific box. This will require you to pass a function down as props - the button should not be a separate component, it should be included in the Box component.
 
 I made it without watching the walkthroughs so I was pretty proud of myself!
 
@@ -915,26 +925,26 @@ In our app, we will be able to view a palette, copy colors, create new palettes,
 
 ### New Stuff We'll Cover
 
-* Material-UI
-  * Library of React components which take HTML, CSS, and JS and combine it together to make useful components
-* Chroma.js
-  * Library useful for converting colors to different formats (i.e rgba to hex); also generating relevant shades for color
-* Emoji-mart
-  * Library for picking emojis
-* react-sortable-hox (drag and drop)
-  * Different drag and drop libraries but we'll be using this one
-* React Pure Components
-  * Another type of component that helps you prevent unnecessary re-renders
-* Form validations
-  * Helps validate forms (no blanks, no duplicates, etc.)
-* Transition group (react-transition-group)
-  * Helps us fade components in and out, also helps us transition between routes
-* JSS
-  * not going to write much CSS, will write styles using JSS
-  * Write JS to describe our styles
-  * Why?
-    * All of our class names will be scoped to each individual component
-    * Can write dynamic styles! Fcns to change how something displays
+- Material-UI
+  - Library of React components which take HTML, CSS, and JS and combine it together to make useful components
+- Chroma.js
+  - Library useful for converting colors to different formats (i.e rgba to hex); also generating relevant shades for color
+- Emoji-mart
+  - Library for picking emojis
+- react-sortable-hox (drag and drop)
+  - Different drag and drop libraries but we'll be using this one
+- React Pure Components
+  - Another type of component that helps you prevent unnecessary re-renders
+- Form validations
+  - Helps validate forms (no blanks, no duplicates, etc.)
+- Transition group (react-transition-group)
+  - Helps us fade components in and out, also helps us transition between routes
+- JSS
+  - not going to write much CSS, will write styles using JSS
+  - Write JS to describe our styles
+  - Why?
+    - All of our class names will be scoped to each individual component
+    - Can write dynamic styles! Fcns to change how something displays
 
 ### Creating the Palette Component
 
@@ -966,7 +976,7 @@ Colt's version (class based components) used setState(state, callback) to make t
 const changeCopyState = () => {
   setCopied(true);
   setTimeout(() => setCopied(false), 1500);
-}
+};
 ```
 
 ### Generating Shades of Colors
@@ -977,19 +987,16 @@ To do this we used **chroma.js (chroma-js)**. Used `scale()` to create scales of
 
 ```javascript
 function getRange(hexColor) {
-    const end = "#fff";
-    return [
-        chroma(hexColor).darken(1.4).hex(), //darken colors instead of starting from black
-        hexColor,
-        end
-    ];
+  const end = "#fff";
+  return [
+    chroma(hexColor).darken(1.4).hex(), //darken colors instead of starting from black
+    hexColor,
+    end,
+  ];
 }
 
 function getScale(hexColor, numberOfColors) {
-    return chroma
-        .scale(getRange(hexColor))
-        .mode('lab')
-        .colors(numberOfColors);
+  return chroma.scale(getRange(hexColor)).mode("lab").colors(numberOfColors);
 }
 ```
 
@@ -999,29 +1006,32 @@ We then used that helper function to generate a new Palette with all the differe
 const levels = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 
 function generatePalette(starterPalette) {
-    let newPalette = {
-        paletteName: starterPalette.paletteName,
-        id: starterPalette.id,
-        emoji: starterPalette.emoji,
-        colors: {}
-    };
+  let newPalette = {
+    paletteName: starterPalette.paletteName,
+    id: starterPalette.id,
+    emoji: starterPalette.emoji,
+    colors: {},
+  };
 
-    for (let level of levels) {
-        newPalette.colors[level] = [];
+  for (let level of levels) {
+    newPalette.colors[level] = [];
+  }
+  for (let color of starterPalette.colors) {
+    let scale = getScale(color.color, 10).reverse();
+    for (let i in scale) {
+      newPalette.colors[levels[i]].push({
+        name: `${color.name} ${levels[i]}`,
+        id: color.name.toLowerCase().replace(/ /g, "-"),
+        hex: scale[i],
+        rgb: chroma(scale[i]).css(),
+        rgba: chroma(scale[i])
+          .css()
+          .replace("rgb", "rgba")
+          .replace(")", ",1.0)"),
+      });
     }
-    for (let color of starterPalette.colors) {
-        let scale = getScale(color.color, 10).reverse();
-        for (let i in scale) {
-            newPalette.colors[levels[i]].push({
-                name: `${color.name} ${levels[i]}`,
-                id: color.name.toLowerCase().replace(/ /g, "-"),
-                hex: scale[i],
-                rgb: chroma(scale[i]).css(),
-                rgba: chroma(scale[i]).css().replace("rgb", "rgba").replace(")", ",1.0)")
-            });
-        }
-    }
-    return newPalette
+  }
+  return newPalette;
 }
 ```
 
@@ -1029,23 +1039,31 @@ Then, pass the new generated palette down to the Palette component!
 
 ### Adding Color Slider
 
-We want a slider to change the shades of the colors... how do we do this? Use ***rc-slider***!
+We want a slider to change the shades of the colors... how do we do this? Use **_rc-slider_**!
 
 Use the `level` state variable to keep track of what level to show and change the state whenever the slider value changes
 
 ```javascript
-<Slider defaultValue={level} min={100} max={900} step={100} onAfterChange={changeLevel} />
+<Slider
+  defaultValue={level}
+  min={100}
+  max={900}
+  step={100}
+  onAfterChange={changeLevel}
+/>
 ```
 
 ### Styling Color Slider
 
-Downside of using a library like `rc-slider` is that if you want custom styles, you sometimes have to battle w/ the CSS from the library. To fix this you can either use the new inline styles (for `rc-slider`) or you can import the `Palette.css` ***AFTER*** the `package.css`
+Downside of using a library like `rc-slider` is that if you want custom styles, you sometimes have to battle w/ the CSS from the library. To fix this you can either use the new inline styles (for `rc-slider`) or you can import the `Palette.css` **_AFTER_** the `package.css`
 
 ### Adding Navbar Component
 
 Wasn't too complicated, added a Navbar component with some divs for styling and a button for main page.
 
 ## TO DO: ADD NOTES FOR CONTEXT API
+
+## TO DO: ADD NOTES FOR NEXT JS 13
 
 Day 2 of being down bad from covid... I will return!
 
