@@ -1065,6 +1065,8 @@ Wasn't too complicated, added a Navbar component with some divs for styling and 
 
 ## TO DO: ADD NOTES FOR NEXT JS 13
 
+## MAN I NEED A BREAK, MAYBE I WANNA LEARN TYPESCRIPT LMAO
+
 Day 2 of being down bad from covid... I will return!
 
 Day 3 of being super down bad, at er
